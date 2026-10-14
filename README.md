@@ -18,7 +18,7 @@ npm run build      # production build into dist/
 | Affiliation row | `src/data/site.ts` (`affiliations`) |
 | Tagline and position | `src/data/site.ts` (`tagline`, `position`) |
 | Interests sentence (icons inline) | `src/data/site.ts` (`interests`) |
-| Leadership section | `src/data/site.ts` (`leadership`) |
+| Leadership and Organization section | `src/data/site.ts` (`leadership`) |
 
 The footer's "Last updated" date is set automatically each time the site is built (every push).
 | News | `src/data/news.ts`, newest first; `visibleCount` sets how many show before "Older news" |

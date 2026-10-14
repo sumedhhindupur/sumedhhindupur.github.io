@@ -33,25 +33,25 @@ export const interests = [
 // The affiliation row under the intro, newest first. The first one is highlighted as current.
 // `honor` (optional) shows as an extra line.
 export const affiliations = [
-  { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–' },
+  { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–Present' },
   { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
   { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
   { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23', honor: 'Institute Silver Medal' },
 ];
 
-// The Leadership section after Research.
+// The Leadership and Organization section after Research.
 export const leadership = [
   {
     name: 'PRISM Reading Club',
     url: 'https://prism-interp-neuro.github.io/',
     role: 'Co-founder',
-    years: '2025–',
+    years: '2025–Present',
     text: 'A weekly reading group at Harvard SEAS and the Kempner Institute on the intersection of neuroscience and ML interpretability, with paper presentations and panel discussions.',
   },
   {
     name: 'Harvard Graduate Tennis Club',
     url: 'https://harvardgraduatetennis.org/',
-    role: 'Officer (2024–) · Co-President (2024–25)',
+    role: 'Officer (2024–Present) · Co-President (2024–25)',
     years: '',
     text: 'The largest graduate club at Harvard, with 300+ members since its founding. I teach beginner lessons, run weekly practice sessions for intermediate and advanced players, and handle court bookings and club communications.',
   },
