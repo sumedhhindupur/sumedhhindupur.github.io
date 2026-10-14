@@ -16,7 +16,8 @@ export const site = {
     { label: 'Scholar', icon: 'scholar', url: 'https://scholar.google.com/citations?user=Hydyi-4AAAAJ' },
     { label: 'GitHub', icon: 'github', url: 'https://github.com/Sai-Sumedh' },
     { label: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/in/sai-sumedh-h-r/' },
-    // { label: 'X', icon: 'x', url: 'https://x.com/YOUR_HANDLE' },
+    { label: 'X', icon: 'x', url: 'https://x.com/sumedh_hrs' },
+    { label: 'Bluesky', icon: 'bluesky', url: 'https://bsky.app/profile/sumedh-hindupur.bsky.social' },
     { label: 'CV', icon: 'cv', url: '/cv.pdf' },
   ] as const,
 };

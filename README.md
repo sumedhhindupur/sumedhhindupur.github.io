@@ -23,7 +23,7 @@ npm run build      # production build into dist/
 
 **Email:** stored as two parts (`email.user`, `email.domain`) in `site.ts`, so the full address never appears in the page source or this repo. The footer shows it as `name [at] gmail [dot] com`, and email links build the `mailto:` only when clicked.
 
-**Links and icons:** each entry in `links` has an `icon`: `scholar`, `github`, `linkedin`, `x` or `cv`.
+**Links and icons:** each entry in `links` has an `icon`: `scholar`, `github`, `linkedin`, `x`, `bluesky` or `cv`.
 
 **Photo:** save as `public/photo.jpg`, then set `photo: '/photo.jpg'` in `site.ts`.
 
