@@ -14,9 +14,10 @@ npm run build      # production build into dist/
 
 | What | File |
 |---|---|
-| Name, photo, intro, links | `src/data/site.ts` (`site`) |
+| Name, photo, links | `src/data/site.ts` (`site`) |
 | Affiliation row | `src/data/site.ts` (`affiliations`) |
-| Interests sentence and icon row | `src/data/site.ts` (`interestsLine`, `interests`) |
+| Tagline and position | `src/data/site.ts` (`tagline`, `position`) |
+| Interests sentence (icons inline) | `src/data/site.ts` (`interests`) |
 | Leadership section | `src/data/site.ts` (`leadership`) |
 | News | `src/data/news.ts`, newest first; `visibleCount` sets how many show before "Older news" |
 | Research projects and themes | `src/data/research.ts` |

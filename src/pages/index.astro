@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, affiliations, interests, interestsLine, leadership } from '../data/site';
+import { site, affiliations, interests, leadership } from '../data/site';
 import { news, visibleCount } from '../data/news';
 import { groups, me } from '../data/research';
 import Icon from '../components/Icon.astro';
@@ -20,12 +20,12 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
         : <div class="photo placeholder" aria-hidden="true">{initials}</div>}
       <div>
         <h1>{site.name}</h1>
-        <p class="intro" set:html={site.intro} />
-        <p class="intro">{interestsLine}</p>
-        <p class="interests">
-          {interests.map((i) => 'url' in i
-            ? <a href={i.url}>{i.icons.map((n) => <Icon name={n} />)}{i.label}</a>
-            : <span>{i.icons.map((n) => <Icon name={n} />)}{i.label}</span>)}
+        <p class="tagline">{site.tagline}</p>
+        <p class="intro" set:html={site.position} />
+        <p class="intro">
+          Outside research, I love {interests.map((i, k) => (
+            <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}<span class="hobby">{i.icons.map((n) => <Icon name={n} />)}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</span></>
+          ))}.
         </p>
         <p class="links">
           <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}><Icon name="mail" />Email</a>
@@ -145,10 +145,10 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
     margin: 0 0 10px;
   }
   .intro { margin: 0 0 14px; color: #333; max-width: 560px; }
-  .interests { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: -4px 0 18px; font-size: 14px; color: var(--muted); }
-  .interests > * { display: inline-flex; align-items: center; gap: 6px; }
-  .interests a { color: var(--muted); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
-  .interests a:hover { color: var(--text); }
+  .tagline { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 10px; }
+  .hobby { white-space: nowrap; }
+  .hobby :global(.icon) { vertical-align: -0.12em; margin-right: 4px; color: var(--muted); }
+  .hobby :global(.icon + .icon) { margin-left: -1px; }
   .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; font-size: 15px; }
   .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
   .links a:hover { color: var(--text); text-decoration: none; }

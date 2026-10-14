@@ -4,9 +4,10 @@ export const site = {
   name: 'Sumedh Hindupur',
   // Put your photo at public/photo.jpg and set this to '/photo.jpg'.
   photo: '/photo.jpg' as string | null,
-  // Short description under your name. Plain HTML is allowed.
-  intro: `PhD candidate in Applied Mathematics at Harvard, advised by
-    <a href="https://crisp.seas.harvard.edu/">Demba Ba</a>. I read the minds of AI models and animals.`,
+  // One line under your name, then your position. The position may contain HTML links.
+  tagline: 'I read the minds of AI models and animals.',
+  position: `PhD candidate in Applied Mathematics at Harvard, advised by
+    <a href="https://crisp.seas.harvard.edu/">Demba Ba</a>.`,
   // Your email, split in two so spam bots scraping the page (or this repo) can't read it.
   // The page joins the parts only when someone clicks an email link.
   email: { user: 'sumedh.hindupur', domain: 'gmail.com' },
@@ -20,14 +21,13 @@ export const site = {
   ] as const,
 };
 
-// Shown under the intro, before the contact links. Add a `url` to any item to make it a link.
-// `icons` can list more than one icon.
-export const interestsLine = 'Outside research, I love long-distance running, playing tennis, reading books and playing the guitar.';
+// Rendered as "Outside research, I love A, B, C and D." with each item's icons inline.
+// Add a `url` to any item to make it a link.
 export const interests = [
-  { label: 'Running', icons: ['running'] },
-  { label: 'Tennis', icons: ['tennis'], url: 'https://harvardgraduatetennis.org/' },
-  { label: 'Books', icons: ['books'] },
-  { label: 'Guitar', icons: ['guitar', 'music'] },
+  { text: 'long-distance running', icons: ['running'] },
+  { text: 'playing tennis', icons: ['tennis'], url: 'https://harvardgraduatetennis.org/' },
+  { text: 'reading books', icons: ['books'] },
+  { text: 'playing the guitar', icons: ['guitar', 'music'] },
 ] as const;
 
 // The affiliation row under the intro, newest first. The first one is highlighted as current.
