@@ -3,7 +3,7 @@
 export const site = {
   name: 'Sumedh Hindupur',
   // Put your photo at public/photo.jpg and set this to '/photo.jpg'.
-  photo: null as string | null,
+  photo: '/photo.jpg' as string | null,
   // Short description under your name. Plain HTML is allowed.
   intro: `PhD candidate in Applied Mathematics at Harvard, advised by
     <a href="https://crisp.seas.harvard.edu/">Demba Ba</a>. I study how neural
@@ -52,7 +52,7 @@ export const leadership = [
   {
     name: 'Harvard Graduate Tennis Club',
     url: 'https://harvardgraduatetennis.org/',
-    role: 'Officer; former Co-President',
+    role: 'Officer (2024–) · Co-President (2024–25)',
     years: '',
     text: '',
   },
