@@ -11,6 +11,7 @@ type Project = {
   venue: string;
   summary: string;
   media: string | null;
+  credit?: { text: string; url: string }; // optional caption under the visual
   links: { label: string; url: string }[];
 };
 
@@ -26,8 +27,8 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
         authors: 'Sai Sumedh R. Hindupur, Hadas Orgad, Thomas Fel, Demba Ba',
         venue: 'Preprint',
         summary: 'Qwen2.5-7B represents numbers on curved manifolds, yet compares them using linear representations. We distil its computation into a concise algorithm that extends to longer sequences.',
-        media: null,
-        links: [],
+        media: '/media/comparison.jpg',
+        links: [{ label: 'Paper', url: 'https://arxiv.org/abs/2609.37680' }],
       },
     ],
   },
@@ -62,7 +63,8 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
         authors: 'S. Amin Moosavi†, Sai Sumedh R. Hindupur†, Hideaki Shimazaki',
         venue: 'Science Advances 2026',
         summary: 'In recordings of ~20,000 neurons in mouse visual cortex, shared noise slows the growth of information with population size but does not cap it.',
-        media: null,
+        media: '/media/population-coding.jpg',
+        credit: { text: '© KyotoU / Robin Hoshino', url: 'https://www.kyoto-u.ac.jp/en/research-news/2026-09-28' },
         links: [
           { label: 'Paper', url: 'https://doi.org/10.1126/sciadv.adz9632' },
           { label: 'Press', url: 'https://www.kyoto-u.ac.jp/en/research-news/2026-09-28' },

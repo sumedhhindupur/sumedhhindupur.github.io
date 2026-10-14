@@ -31,6 +31,8 @@ npm run build      # production build into dist/
 
 **Project visuals:** put files in `public/media/` and set `media: '/media/name.mp4'` (or `.png`/`.jpg`) in `research.ts`. Videos autoplay muted on a loop. Use a 4:3 aspect ratio and keep videos under ~3 MB (e.g. `ffmpeg -i in.mov -vf scale=800:-2 -an -crf 28 out.mp4`).
 
+Add `credit: { text: '© ...', url: '...' }` to a project to show a small credit line under its visual.
+
 **Blog posts:** copy `src/content/writing/example-post.md`. The file name becomes the URL (`/writing/<file-name>/`). Front matter:
 - `category: research` or `personal` picks the tab.
 - `draft: true` hides the post from the live site but shows it in `npm run dev`.
