@@ -6,9 +6,7 @@ export const site = {
   photo: '/photo.jpg' as string | null,
   // Short description under your name. Plain HTML is allowed.
   intro: `PhD candidate in Applied Mathematics at Harvard, advised by
-    <a href="https://crisp.seas.harvard.edu/">Demba Ba</a>. I study how neural
-    representations support computation, in language models and in the brain,
-    using representation geometry and causal interventions.`,
+    <a href="https://crisp.seas.harvard.edu/">Demba Ba</a>. I read the minds of AI models and animals.`,
   // Your email, split in two so spam bots scraping the page (or this repo) can't read it.
   // The page joins the parts only when someone clicks an email link.
   email: { user: 'sumedh.hindupur', domain: 'gmail.com' },
@@ -23,13 +21,13 @@ export const site = {
 };
 
 // Shown under the intro, before the contact links. Add a `url` to any item to make it a link.
-export const interestsLine = 'Outside research, I love long-distance running, playing tennis, reading books, and music, especially playing the guitar.';
+// `icons` can list more than one icon.
+export const interestsLine = 'Outside research, I love long-distance running, playing tennis, reading books and playing the guitar.';
 export const interests = [
-  { label: 'Running', icon: 'running' },
-  { label: 'Tennis', icon: 'tennis', url: 'https://harvardgraduatetennis.org/' },
-  { label: 'Books', icon: 'books' },
-  { label: 'Guitar', icon: 'guitar' },
-  { label: 'Music', icon: 'music' },
+  { label: 'Running', icons: ['running'] },
+  { label: 'Tennis', icons: ['tennis'], url: 'https://harvardgraduatetennis.org/' },
+  { label: 'Books', icons: ['books'] },
+  { label: 'Guitar', icons: ['guitar', 'music'] },
 ] as const;
 
 // The affiliation row under the intro, newest first. The first one is highlighted as current.

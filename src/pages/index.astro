@@ -24,8 +24,8 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
         <p class="intro">{interestsLine}</p>
         <p class="interests">
           {interests.map((i) => 'url' in i
-            ? <a href={i.url}><Icon name={i.icon} />{i.label}</a>
-            : <span><Icon name={i.icon} />{i.label}</span>)}
+            ? <a href={i.url}>{i.icons.map((n) => <Icon name={n} />)}{i.label}</a>
+            : <span>{i.icons.map((n) => <Icon name={n} />)}{i.label}</span>)}
         </p>
         <p class="links">
           <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}><Icon name="mail" />Email</a>
