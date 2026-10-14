@@ -33,7 +33,7 @@ body {
   background-repeat: no-repeat;
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 18px;
+  font-size: 19px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -46,7 +46,7 @@ a:hover { text-decoration: underline; text-decoration-color: var(--amber); text-
 
 .mono {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 13.5px;
   letter-spacing: 0.02em;
   color: var(--muted);
 }
