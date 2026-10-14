@@ -53,7 +53,7 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
     projects: [
       {
         title: 'Projecting Assumptions: The Duality between Sparse Autoencoders and Concept Geometry',
-        authors: 'Sai Sumedh R. Hindupur, Ekdeep Singh Lubana, Thomas Fel, Demba Ba',
+        authors: 'Sai Sumedh R. Hindupur†, Ekdeep Singh Lubana†, Thomas Fel†, Demba Ba',
         venue: 'NeurIPS 2025',
         summary: 'Each SAE implicitly assumes a geometry for concepts. We make these assumptions explicit and build SpaDE, an SAE that captures nonlinearly separable and heterogeneous concepts that other SAEs miss.',
         media: null,
@@ -61,7 +61,7 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
       },
       {
         title: 'Priors in Time: Missing Inductive Biases for Language Model Interpretability',
-        authors: 'Ekdeep Singh Lubana, Can Rager, Sai Sumedh R. Hindupur, et al.',
+        authors: 'Ekdeep Singh Lubana†, Can Rager†, Sai Sumedh R. Hindupur†, et al.',
         venue: 'ICLR 2026',
         summary: 'Standard SAEs implicitly assume concepts are independent across time, but language model representations are not. We introduce the Temporal Feature Analyzer to capture this structure.',
         media: null,
@@ -83,7 +83,7 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
     projects: [
       {
         title: 'Population Coding under the Scale Invariance of High-Dimensional Noise',
-        authors: 'S. Amin Moosavi, Sai Sumedh R. Hindupur, Hideaki Shimazaki',
+        authors: 'S. Amin Moosavi†, Sai Sumedh R. Hindupur†, Hideaki Shimazaki',
         venue: 'Science Advances 2026',
         summary: 'In recordings of ~20,000 neurons in mouse visual cortex, shared noise slows the growth of information with population size but does not cap it.',
         media: null,

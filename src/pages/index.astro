@@ -60,6 +60,7 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
     <!-- Research -->
     <section id="research">
       <h2 class="section">Research</h2>
+      <p class="mono note">† equal contribution</p>
       {groups.map((g) => (
         <div class="group">
           <h3>{g.theme}</h3>
@@ -150,6 +151,7 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
   summary { cursor: pointer; padding: 6px 0; }
   summary:hover { color: var(--text); }
 
+  .note { margin: -12px 0 20px; color: var(--faint); }
   .group { margin-bottom: 40px; }
   .group:last-child { margin-bottom: 0; }
   h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
