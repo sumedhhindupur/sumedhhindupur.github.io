@@ -55,6 +55,6 @@ export const leadership = [
     url: 'https://harvardgraduatetennis.org/',
     role: 'Officer (2024–Present) · Co-President (2024–25)',
     years: '',
-    text: 'The largest graduate club at Harvard, with 300+ members since its founding. I teach beginner lessons, run weekly practice sessions for intermediate and advanced players, and handle court bookings and club communications.',
+    text: 'The largest graduate club at Harvard, with 300+ members since its founding. As an officer, I help teach beginner lessons, run weekly practice sessions for intermediate and advanced players, and manage court bookings and club communications.',
   },
 ];
