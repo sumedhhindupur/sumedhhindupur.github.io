@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props { title?: string; description?: string; math?: boolean }
+const { title, description = 'Sumedh Hindupur: representation geometry, interpretability and computational neuroscience.', math = false } = Astro.props;
+const pageTitle = title ? `${title} · ${site.name}` : site.name;
+const path = Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- To change fonts, replace this link and the variables at the top of src/styles/global.css -->
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..700;1,300..700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    {math && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />}
+  </head>
+  <body>
+    <header class="container nav">
+      <a href="/" class="brand">{site.name}</a>
+      <nav>
+        <a href="/#research">Research</a>
+        <a href="/writing/" class={path.startsWith('/writing') ? 'active' : ''}>Writing</a>
+        <a href="/cv.pdf">CV</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="container">
+      <span class="mono">© {new Date().getFullYear()} {site.name}</span>
+      <span class="mono"><a href={`mailto:${site.email}`}>{site.email}</a></span>
+    </footer>
+  </body>
+</html>
+
+<style>
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 22px;
+    padding-bottom: 22px;
+  }
+  .brand { color: var(--text); font-weight: 600; letter-spacing: -0.01em; }
+  .brand:hover { text-decoration: none; }
+  nav { display: flex; gap: 22px; font-size: 15px; }
+  nav a { color: var(--muted); }
+  nav a:hover, nav a.active { color: var(--text); text-decoration: none; }
+  footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 28px;
+    padding-bottom: 40px;
+    border-top: 1px solid var(--rule);
+  }
+</style>

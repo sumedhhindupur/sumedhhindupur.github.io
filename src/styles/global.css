@@ -1,0 +1,53 @@
+/* To change fonts: edit these two variables AND the Google Fonts <link> in src/layouts/Base.astro. */
+:root {
+  --font-sans: 'Figtree', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  --text: #111;
+  --muted: #6b6b6b;
+  --faint: #9a9a9a;
+  --rule: #e8e8e8;
+  --bg: #fff;
+  --surface: #f6f6f5;
+  --accent: #1f5fbf;
+
+  --width: 760px;
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+.container { max-width: var(--width); margin: 0 auto; padding: 0 20px; }
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+h2.section {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+section { padding: 44px 0; border-top: 1px solid var(--rule); }
