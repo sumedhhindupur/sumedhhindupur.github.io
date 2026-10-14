@@ -31,11 +31,12 @@ export const interests = [
 ] as const;
 
 // The affiliation row under the intro, newest first. The first one is highlighted as current.
+// `honor` (optional) shows as an extra line.
 export const affiliations = [
   { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–' },
   { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
   { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
-  { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23' },
+  { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23', honor: 'Institute Silver Medal' },
 ];
 
 // The Leadership section after Research.
@@ -52,6 +53,6 @@ export const leadership = [
     url: 'https://harvardgraduatetennis.org/',
     role: 'Officer (2024–) · Co-President (2024–25)',
     years: '',
-    text: '',
+    text: 'The largest graduate club at Harvard, with 300+ members since its founding. I teach beginner lessons, run weekly practice sessions for intermediate and advanced players, and handle court bookings and club communications.',
   },
 ];

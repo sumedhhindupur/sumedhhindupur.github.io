@@ -10,6 +10,7 @@ const older = news.slice(visibleCount);
 const boldMe = (authors: string) => authors.replace(me, `<b>${me}</b>`);
 const isVideo = (src: string) => /\.(mp4|webm)$/i.test(src);
 const initials = site.name.split(' ').map((w) => w[0]).join('');
+const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 ---
 <Base>
   <div class="container">
@@ -40,6 +41,7 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
         <li>
           <span class="aff-name">{a.name}</span>
           <span class="mono">{a.role}</span>
+          {a.honor && <span class="mono honor">{a.honor}</span>}
           <span class="mono faint">{a.years}</span>
         </li>
       ))}
@@ -96,6 +98,7 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
           ))}
         </div>
       ))}
+      <p class="mono all-pubs"><a href={scholar}>Full publication list on Google Scholar →</a></p>
     </section>
 
     <!-- Leadership -->
@@ -167,6 +170,8 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
   .affiliations li:first-child { border-top-color: var(--text); }
   .aff-name { font-weight: 600; font-size: 15px; }
   .faint { color: var(--faint); }
+  .honor { color: var(--text); }
+  .all-pubs { margin: 28px 0 0; }
 
   .news { list-style: none; padding: 0; margin: 0; }
   .news li {

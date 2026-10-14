@@ -6,6 +6,8 @@ interface Props { title?: string; description?: string; math?: boolean }
 const { title, description = 'Sumedh Hindupur: representation geometry, interpretability and computational neuroscience.', math = false } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
 const path = Astro.url.pathname;
+// Set when the site is built, i.e. on every push.
+const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
 ---
 <!doctype html>
 <html lang="en">
@@ -35,7 +37,7 @@ const path = Astro.url.pathname;
       <slot />
     </main>
     <footer class="container">
-      <span class="mono">© {new Date().getFullYear()} {site.name}</span>
+      <span class="mono">© {new Date().getFullYear()} {site.name} · Last updated {updated}</span>
       <span class="mono"><a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>{site.email.user} [at] {site.email.domain.replace('.', ' [dot] ')}</a></span>
     </footer>
     <script>
