@@ -53,7 +53,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
       <h2 class="section">News</h2>
       <ul class="news">
         {recent.map((n) => (
-          <li><span class="mono">{n.date}</span><span class="tag mono">{n.tag}</span><span set:html={n.text} /></li>
+          <li><span class="mono">{n.date}</span><span class="tagcell"><span class={`tag mono tag-${n.tag.toLowerCase()}`}>{n.tag}</span></span><span set:html={n.text} /></li>
         ))}
       </ul>
       {older.length > 0 && (
@@ -61,7 +61,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
           <summary class="mono">Older news</summary>
           <ul class="news">
             {older.map((n) => (
-              <li><span class="mono">{n.date}</span><span class="tag mono">{n.tag}</span><span set:html={n.text} /></li>
+              <li><span class="mono">{n.date}</span><span class="tagcell"><span class={`tag mono tag-${n.tag.toLowerCase()}`}>{n.tag}</span></span><span set:html={n.text} /></li>
             ))}
           </ul>
         </details>
@@ -152,7 +152,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .position { margin: -4px 0 14px; color: var(--muted); }
   .tagline { font-size: 23px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 10px; }
   .hobby { white-space: nowrap; }
-  .hobby :global(.icon) { vertical-align: -0.12em; margin-left: 5px; color: var(--muted); }
+  .hobby :global(.icon) { vertical-align: -0.12em; margin-left: 5px; color: var(--amber); }
   .hobby :global(.icon + .icon) { margin-left: 2px; }
   .links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; font-size: 16.5px; }
   .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
@@ -193,13 +193,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   }
   .current .stop { background: var(--accent); border-color: var(--accent); animation: pulse 2.4s ease-out infinite; }
   @keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(31, 95, 191, 0.35); }
-    70%, 100% { box-shadow: 0 0 0 9px rgba(31, 95, 191, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(194, 124, 14, 0.45); }
+    70%, 100% { box-shadow: 0 0 0 9px rgba(194, 124, 14, 0); }
   }
-  @media (prefers-reduced-motion: reduce) { .current .stop { animation: none; box-shadow: 0 0 0 4px rgba(31, 95, 191, 0.15); } }
+  @media (prefers-reduced-motion: reduce) { .current .stop { animation: none; box-shadow: 0 0 0 4px rgba(194, 124, 14, 0.2); } }
   .aff-name { font-weight: 600; font-size: 17px; margin-top: 2px; }
   .faint { color: var(--faint); }
-  .honor { color: var(--text); }
+  .honor { color: #8a5a08; }
   .all-pubs { margin: 28px 0 0; }
 
   .news { list-style: none; padding: 0; margin: 0; }
@@ -211,15 +211,32 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     padding: 8px 0;
     font-size: 17px;
   }
-  .tag { color: var(--faint); font-size: 12px; }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 1px 7px; border-radius: 4px; color: var(--muted); background: #f2f2f0; }
+  .tag-paper { color: var(--navy); background: rgba(31, 58, 110, 0.08); }
+  .tag-talk { color: #3f6b41; background: rgba(77, 124, 79, 0.11); }
+  .tag-press { color: #8a5a08; background: rgba(194, 124, 14, 0.13); }
+  .tag-poster { color: #a33e24; background: rgba(183, 71, 42, 0.1); }
   details { margin-top: 10px; }
   summary { cursor: pointer; padding: 6px 0; }
   summary:hover { color: var(--text); }
 
   .note { margin: -12px 0 20px; color: var(--faint); }
-  .group { margin-bottom: 40px; }
+  .group { margin-bottom: 40px; --theme: var(--navy); }
+  .group:nth-of-type(2) { --theme: var(--amber); }
+  .group:nth-of-type(3) { --theme: var(--rust); }
   .group:last-child { margin-bottom: 0; }
   h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 0.95em;
+    margin-right: 12px;
+    border-radius: 3px;
+    background: var(--theme);
+    vertical-align: -0.1em;
+  }
+  .blurb { padding-left: 17px; }
   .blurb { color: var(--muted); margin: 0 0 8px; }
   .project {
     display: grid;
@@ -228,7 +245,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     padding: 22px 0;
   }
   .media img, .media video, .media-placeholder { aspect-ratio: 4 / 3; border-radius: 6px; background: #fff; border: 1px solid var(--rule); }
-  .media img, .media video { width: 100%; height: auto; object-fit: contain; display: block; }
+  .media img, .media video { width: 100%; height: auto; object-fit: contain; display: block; transition: border-color 0.2s, box-shadow 0.2s; }
+  .project:hover .media img, .project:hover .media video { border-color: var(--theme); box-shadow: 0 4px 16px -8px var(--theme); }
   .media-placeholder {
     width: 100%;
     display: grid;
@@ -260,7 +278,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     .affiliations li:nth-last-child(2)::after { background: linear-gradient(to bottom, #e2e2e2 30%, var(--accent)); }
     .stop { top: 3px; }
     .news li { grid-template-columns: 58px 1fr; }
-    .news li .tag { display: none; }
+    .news li .tagcell { display: none; }
     .project { grid-template-columns: 1fr; gap: 12px; }
   }
 </style>

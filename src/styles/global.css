@@ -9,7 +9,12 @@
   --rule: #e8e8e8;
   --bg: #fff;
   --surface: #f6f6f5;
-  --accent: #1f5fbf;
+  /* "Navy & Autumn" palette, taken from the photo. --accent is used for links and the timeline. */
+  --navy: #1f3a6e;
+  --amber: #c27c0e;
+  --rust: #b7472a;
+  --green: #4d7c4f;
+  --accent: var(--navy);
 
   --width: 900px;
 }
@@ -20,7 +25,12 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  background: var(--bg);
+  /* A faint warm glow at the top of every page. */
+  background:
+    radial-gradient(900px 420px at 15% -120px, rgba(194, 124, 14, 0.09), transparent 70%),
+    radial-gradient(900px 420px at 85% -160px, rgba(31, 58, 110, 0.07), transparent 70%),
+    var(--bg);
+  background-repeat: no-repeat;
   color: var(--text);
   font-family: var(--font-sans);
   font-size: 18px;
@@ -29,7 +39,7 @@ body {
 }
 
 a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: 3px; }
+a:hover { text-decoration: underline; text-decoration-color: var(--amber); text-underline-offset: 3px; }
 
 .container { max-width: var(--width); margin: 0 auto; padding: 0 20px; }
 

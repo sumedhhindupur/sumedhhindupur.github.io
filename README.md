@@ -41,7 +41,7 @@ Add `credit: { text: '© ...', url: '...' }` to a project to show a small credit
 - `draft: true` hides the post from the live site but shows it in `npm run dev`.
 - Math uses `$...$` and `$$...$$` (KaTeX).
 
-**Changing the font:** edit the Google Fonts `<link>` in `src/layouts/Base.astro` and `--font-sans` / `--font-mono` at the top of `src/styles/global.css`. Colors and widths are variables in the same place.
+**Changing the font:** edit the Google Fonts `<link>` in `src/layouts/Base.astro` and `--font-sans` / `--font-mono` at the top of `src/styles/global.css`. Colors (the "Navy & Autumn" palette: `--navy`, `--amber`, `--rust`, `--green`) and widths are variables in the same place. Research themes take their color from their position (1st navy, 2nd amber, 3rd rust); news tags are colored by type.
 
 ## Visitor stats
 
