@@ -6,6 +6,8 @@ export const site = {
   photo: '/photo.jpg' as string | null,
   // One line under your name, then your position. The position may contain HTML links.
   tagline: 'I read the minds of AI models and animals.',
+  // Shown under the tagline, separated by dots.
+  keywords: ['Representation geometry', 'Mechanistic interpretability', 'Computational neuroscience'],
   position: `PhD candidate in Applied Mathematics at Harvard, advised by
     <a href="https://crisp.seas.harvard.edu/">Demba Ba</a>.`,
   // Your email, split in two so spam bots scraping the page (or this repo) can't read it.

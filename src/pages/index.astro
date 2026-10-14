@@ -23,6 +23,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         <h1>{site.name}</h1>
         <p class="position" set:html={site.position} />
         <p class="tagline">{site.tagline}</p>
+        <p class="keywords mono">{site.keywords.join(' · ')}</p>
         <p class="intro">
           Outside research, I love {interests.map((i, k) => (
             <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}<span class="hobby">{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}{i.icons.map((n) => <Icon name={n} />)}</span></>
@@ -150,7 +151,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   }
   .intro { margin: 0 0 14px; color: #333; max-width: 760px; }
   .position { margin: -4px 0 14px; color: var(--muted); }
-  .tagline { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 10px; }
+  .tagline { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 4px; }
+  .keywords { font-size: 14px; color: var(--navy); margin: 0 0 16px; }
   .hobby { white-space: nowrap; }
   .hobby :global(.icon) { vertical-align: -0.12em; margin-left: 5px; color: var(--amber); }
   .hobby :global(.icon + .icon) { margin-left: 2px; }

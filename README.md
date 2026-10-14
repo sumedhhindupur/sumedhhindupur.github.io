@@ -16,7 +16,7 @@ npm run build      # production build into dist/
 |---|---|
 | Name, photo, links | `src/data/site.ts` (`site`) |
 | Affiliation row | `src/data/site.ts` (`affiliations`) |
-| Tagline and position | `src/data/site.ts` (`tagline`, `position`) |
+| Tagline, keywords and position | `src/data/site.ts` (`tagline`, `keywords`, `position`) |
 | Interests sentence (icons inline) | `src/data/site.ts` (`interests`) |
 | Leadership and Organization section | `src/data/site.ts` (`leadership`) |
 
