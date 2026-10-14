@@ -18,7 +18,7 @@ export const me = 'Sai Sumedh R. Hindupur';
 
 export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
   {
-    theme: 'Geometry and computation in language models',
+    theme: 'From geometry to computation',
     blurb: 'How do models actually use the geometry of their representations to compute?',
     projects: [
       {
@@ -29,27 +29,11 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
         media: null,
         links: [],
       },
-      {
-        title: 'On the Dissociation of Order and Identity in Number Manifold Representations',
-        authors: 'Sai Sumedh R. Hindupur, Thomas Fel, Demba Ba',
-        venue: 'NeurReps Workshop, NeurIPS 2026',
-        summary: 'Do number manifolds in language models encode a number’s order and its identity together, or separately?',
-        media: null,
-        links: [],
-      },
-      {
-        title: 'From States to Dynamics: Detecting Rule Violations in OthelloGPT',
-        authors: 'David Cao, Sai Sumedh R. Hindupur, Demba Ba',
-        venue: 'InterpScience Workshop, NeurIPS 2026',
-        summary: 'How does OthelloGPT encode the rules of the game, beyond the board state?',
-        media: null,
-        links: [],
-      },
     ],
   },
   {
-    theme: 'Assumptions built into interpretability tools',
-    blurb: 'Every interpretability method assumes something about the structure it is looking for. What happens when that assumption is wrong?',
+    theme: 'Uncovering the geometry of models',
+    blurb: 'Interpretability tools assume a geometry for the concepts they look for. Making those assumptions explicit reveals structure that standard tools miss.',
     projects: [
       {
         title: 'Projecting Assumptions: The Duality between Sparse Autoencoders and Concept Geometry',
@@ -67,19 +51,11 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
         media: null,
         links: [{ label: 'Paper', url: 'https://arxiv.org/abs/2511.01836' }],
       },
-      {
-        title: 'Sparse, Self-Organizing Ensembles of Local Kernels Detect Rare Statistical Anomalies',
-        authors: 'Gaia Grosso, Sai Sumedh R. Hindupur, Thomas Fel, Samuel Bright-Thonney, Philip Harris, Demba Ba',
-        venue: 'Preprint',
-        summary: 'SparKer, a sparse ensemble of competing Gaussian kernels, detects statistical anomalies across particle physics, language and vision.',
-        media: null,
-        links: [{ label: 'Paper', url: 'https://arxiv.org/abs/2511.03095' }],
-      },
     ],
   },
   {
-    theme: 'Neuroscience and earlier work',
-    blurb: '',
+    theme: 'Geometry reflects data properties',
+    blurb: 'The geometry of a representation is shaped by the statistics of what it encodes.',
     projects: [
       {
         title: 'Population Coding under the Scale Invariance of High-Dimensional Noise',
@@ -93,12 +69,12 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
         ],
       },
       {
-        title: 'Online Parameter Estimation in Partially Observed Markov Decision Processes',
-        authors: 'Sai Sumedh R. Hindupur, Vivek S. Borkar',
-        venue: 'Allerton 2023',
-        summary: 'An online algorithm, with convergence guarantees, for estimating model parameters from partial observations.',
+        title: 'Sparse, Self-Organizing Ensembles of Local Kernels Detect Rare Statistical Anomalies',
+        authors: 'Gaia Grosso, Sai Sumedh R. Hindupur, Thomas Fel, Samuel Bright-Thonney, Philip Harris, Demba Ba',
+        venue: 'Preprint',
+        summary: 'SparKer, a sparse ensemble of competing Gaussian kernels, detects statistical anomalies across particle physics, language and vision.',
         media: null,
-        links: [{ label: 'Paper', url: 'https://ieeexplore.ieee.org/abstract/document/10313415' }],
+        links: [{ label: 'Paper', url: 'https://arxiv.org/abs/2511.03095' }],
       },
     ],
   },

@@ -21,6 +21,10 @@ npm run build      # production build into dist/
 | CV | replace `public/cv.pdf` |
 | Blog posts | `src/content/writing/*.md` |
 
+**Email:** stored as two parts (`email.user`, `email.domain`) in `site.ts`, so the full address never appears in the page source or this repo. The footer shows it as `name [at] gmail [dot] com`, and email links build the `mailto:` only when clicked.
+
+**Links and icons:** each entry in `links` has an `icon`: `scholar`, `github`, `linkedin`, `x` or `cv`.
+
 **Photo:** save as `public/photo.jpg`, then set `photo: '/photo.jpg'` in `site.ts`.
 
 **Project visuals:** put files in `public/media/` and set `media: '/media/name.mp4'` (or `.png`/`.jpg`) in `research.ts`. Videos autoplay muted on a loop. Use a 4:3 aspect ratio and keep videos under ~3 MB (e.g. `ffmpeg -i in.mov -vf scale=800:-2 -an -crf 28 out.mp4`).
@@ -44,6 +48,8 @@ If you move to a custom domain, update `site` in `astro.config.mjs` and add the 
 - `src/styles/global.css`: design tokens (fonts, colors, width) and shared styles: `.container` centers content, `.mono` is the small grey monospace style for dates and venues, and `h2.section` is the small uppercase section label.
 - `src/layouts/Base.astro`: the shell for every page: `<head>` (title, description, fonts, KaTeX CSS only on posts via the `math` prop), top nav and footer.
 - `src/pages/index.astro`: the homepage. Reads the three data files and renders the hero, affiliation row, news (first `visibleCount` items, the rest inside a `<details>` toggle), and research groups. `boldMe` bolds your name in author lists; `isVideo` picks `<video>` vs `<img>` by file extension; projects with `media: null` show a dotted placeholder. On screens under 640px everything stacks into one column.
+- `src/components/Icon.astro`: inline SVG icons (brand logos from Simple Icons, mail/CV from Lucide), sized to the surrounding text and colored with `currentColor`.
+- Email protection: links with class `js-email` carry the address split across `data-u` / `data-d`; a small script in `Base.astro` joins them into a `mailto:` on click.
 - `src/content/config.ts`: the schema for blog posts (title, date, category, description, draft). Astro validates every post's front matter against it at build time.
 - `src/components/PostList.astro`: the Writing page. Takes a `category`, loads the matching posts (drafts only in dev), sorts them newest first, and renders the Research | Personal tabs plus the list.
 - `src/pages/writing/index.astro` and `personal.astro`: the two tabs. Each renders `PostList` with its category.

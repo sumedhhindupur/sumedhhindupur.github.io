@@ -36,8 +36,17 @@ const path = Astro.url.pathname;
     </main>
     <footer class="container">
       <span class="mono">© {new Date().getFullYear()} {site.name}</span>
-      <span class="mono"><a href={`mailto:${site.email}`}>{site.email}</a></span>
+      <span class="mono"><a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>{site.email.user} [at] {site.email.domain.replace('.', ' [dot] ')}</a></span>
     </footer>
+    <script>
+      // Builds the mailto: link only on click, so the address never appears in the page source.
+      document.querySelectorAll<HTMLAnchorElement>('a.js-email').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'mailto:' + a.dataset.u + '@' + a.dataset.d;
+        });
+      });
+    </script>
   </body>
 </html>
 
