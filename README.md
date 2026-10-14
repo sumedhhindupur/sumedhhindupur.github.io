@@ -43,6 +43,10 @@ Add `credit: { text: '© ...', url: '...' }` to a project to show a small credit
 
 **Changing the font:** edit the Google Fonts `<link>` in `src/layouts/Base.astro` and `--font-sans` / `--font-mono` at the top of `src/styles/global.css`. Colors and widths are variables in the same place.
 
+## Visitor stats
+
+Private, cookie-free stats via GoatCounter: https://sumedhhindupur.goatcounter.com (the script is in `src/layouts/Base.astro`). Visits from `localhost` aren't counted.
+
 ## Deploying
 
 Every push to `main` triggers `.github/workflows/deploy.yml`, which builds the site and publishes it to GitHub Pages. One-time setup: repo **Settings → Pages → Source: GitHub Actions**.
