@@ -24,7 +24,7 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
       {
         title: 'When Models Don’t Manipulate Manifolds: The Geometry of a Comparison Task',
         authors: 'Sai Sumedh R. Hindupur, Hadas Orgad, Thomas Fel, Demba Ba',
-        venue: 'Under review, ICLR 2027',
+        venue: 'Preprint',
         summary: 'Qwen2.5-7B represents numbers on curved manifolds, yet compares them using linear representations. We distil its computation into a concise algorithm that extends to longer sequences.',
         media: null,
         links: [],
@@ -70,7 +70,7 @@ export const groups: { theme: string; blurb: string; projects: Project[] }[] = [
       {
         title: 'Sparse, Self-Organizing Ensembles of Local Kernels Detect Rare Statistical Anomalies',
         authors: 'Gaia Grosso, Sai Sumedh R. Hindupur, Thomas Fel, Samuel Bright-Thonney, Philip Harris, Demba Ba',
-        venue: 'Under review, PNAS',
+        venue: 'Preprint',
         summary: 'SparKer, a sparse ensemble of competing Gaussian kernels, detects statistical anomalies across particle physics, language and vision.',
         media: null,
         links: [{ label: 'Paper', url: 'https://arxiv.org/abs/2511.03095' }],
