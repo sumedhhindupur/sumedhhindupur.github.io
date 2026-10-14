@@ -1,9 +1,10 @@
 // Newest first. The first `visibleCount` items show; the rest go under "Older news".
 // tag: PAPER | TALK | POSTER | PRESS | NEWS. `text` may contain HTML links.
 
-export const visibleCount = 6;
+export const visibleCount = 7;
 
 export const news = [
+  { date: '09/2026', tag: 'PAPER', text: 'Our new preprint <a href="https://arxiv.org/abs/2609.37680"><i>When Models Don’t Manipulate Manifolds: The Geometry of a Comparison Task</i></a> is out on arXiv!' },
   { date: '09/2026', tag: 'PAPER', text: 'Our paper <i>On the Dissociation of Order and Identity in Number Manifold Representations</i> was accepted at <a href="https://www.neurreps.org/">NeurReps</a> @ NeurIPS 2026!' },
   { date: '09/2026', tag: 'PAPER', text: 'My mentee David Cao’s paper <i>From States to Dynamics: Detecting Rule Violations in OthelloGPT</i> was accepted at InterpScience @ NeurIPS 2026. Congrats, David!' },
   { date: '09/2026', tag: 'PRESS', text: '<a href="https://www.aljazeera.net/science/2026/9/29/%D8%AD%D9%84-%D9%84%D8%BA%D8%B2-%D8%A7%D9%84%D8%AB%D9%84%D8%A7%D8%AB%D9%8A%D9%86-%D8%B9%D8%A7%D9%85%D8%A7-%D9%83%D9%8A%D9%81-%D9%8A%D8%B3%D8%AA%D9%88%D8%B9%D8%A8-%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D8%BA">Al Jazeera</a> wrote about our Science Advances paper on neural noise.' },
