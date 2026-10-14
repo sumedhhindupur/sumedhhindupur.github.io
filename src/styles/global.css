@@ -16,7 +16,7 @@
   --green: #4d7c4f;
   --accent: var(--navy);
 
-  --width: 900px;
+  --width: 1200px;
 }
 
 * { box-sizing: border-box; }
@@ -41,7 +41,8 @@ body {
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-decoration-color: var(--amber); text-underline-offset: 3px; }
 
-.container { max-width: var(--width); margin: 0 auto; padding: 0 20px; }
+.container { max-width: var(--width); margin: 0 auto; padding: 0 40px; }
+@media (max-width: 640px) { .container { padding: 0 20px; } }
 
 .mono {
   font-family: var(--font-mono);

@@ -121,14 +121,14 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 <style>
   .hero {
     display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 40px;
+    grid-template-columns: 180px 1fr;
+    gap: 48px;
     align-items: center;
     padding: 48px 0 36px;
   }
   .photo {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     object-fit: cover;
     object-position: 50% 30%;
@@ -148,7 +148,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     line-height: 1.15;
     margin: 0 0 10px;
   }
-  .intro { margin: 0 0 14px; color: #333; max-width: 640px; }
+  .intro { margin: 0 0 14px; color: #333; max-width: 760px; }
   .position { margin: -4px 0 14px; color: var(--muted); }
   .tagline { font-size: 23px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 10px; }
   .hobby { white-space: nowrap; }
@@ -236,12 +236,12 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     background: var(--theme);
     vertical-align: -0.1em;
   }
-  .blurb { padding-left: 17px; }
+  .blurb { padding-left: 17px; max-width: 860px; }
   .blurb { color: var(--muted); margin: 0 0 8px; }
   .project {
     display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 32px;
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
     padding: 22px 0;
   }
   .media img, .media video, .media-placeholder { aspect-ratio: 4 / 3; border-radius: 6px; background: #fff; border: 1px solid var(--rule); }
@@ -260,13 +260,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .authors { font-size: 16px; color: var(--muted); margin: 0; }
   .authors :global(b) { color: var(--text); font-weight: 600; }
   .venue { margin: 2px 0 6px; }
-  .summary { font-size: 16.5px; margin: 0 0 6px; color: #333; }
+  .summary { font-size: 16.5px; margin: 0 0 6px; color: #333; max-width: 780px; }
   .plinks { display: flex; gap: 14px; margin: 0; }
 
   .lead { padding: 8px 0 12px; }
   .lead-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
   .lead-name { color: var(--text); font-weight: 600; }
-  .lead p { margin: 4px 0 0; font-size: 16.5px; color: #333; }
+  .lead p { margin: 4px 0 0; font-size: 16.5px; color: #333; max-width: 860px; }
 
   @media (max-width: 640px) {
     .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 24px; }
