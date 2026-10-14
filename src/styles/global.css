@@ -11,7 +11,7 @@
   --surface: #f6f6f5;
   --accent: #1f5fbf;
 
-  --width: 760px;
+  --width: 900px;
 }
 
 * { box-sizing: border-box; }
@@ -23,7 +23,7 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 16.5px;
+  font-size: 18px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -35,13 +35,13 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .mono {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 13px;
   letter-spacing: 0.02em;
   color: var(--muted);
 }
 
 h2.section {
-  font-size: 13px;
+  font-size: 14px;
   font-family: var(--font-mono);
   font-weight: 500;
   text-transform: uppercase;

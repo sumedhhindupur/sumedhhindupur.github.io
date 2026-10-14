@@ -37,12 +37,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 
     <!-- Affiliations -->
     <ol class="affiliations">
-      {affiliations.map((a) => (
-        <li>
+      {affiliations.map((a, k) => (
+        <li class:list={{ current: k === 0 }}>
+          <span class="stop" aria-hidden="true"></span>
+          <span class="mono faint">{a.years}</span>
           <span class="aff-name">{a.name}</span>
           <span class="mono">{a.role}</span>
           {a.honor && <span class="mono honor">{a.honor}</span>}
-          <span class="mono faint">{a.years}</span>
         </li>
       ))}
     </ol>
@@ -120,14 +121,14 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 <style>
   .hero {
     display: grid;
-    grid-template-columns: 132px 1fr;
-    gap: 32px;
+    grid-template-columns: 160px 1fr;
+    gap: 40px;
     align-items: center;
     padding: 48px 0 36px;
   }
   .photo {
-    width: 132px;
-    height: 132px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     object-fit: cover;
     object-position: 50% 30%;
@@ -137,38 +138,66 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     place-items: center;
     background: var(--surface);
     color: var(--faint);
-    font-size: 34px;
+    font-size: 40px;
     font-weight: 300;
   }
   h1 {
-    font-size: 34px;
+    font-size: 40px;
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.15;
     margin: 0 0 10px;
   }
-  .intro { margin: 0 0 14px; color: #333; max-width: 560px; }
+  .intro { margin: 0 0 14px; color: #333; max-width: 640px; }
   .position { margin: -4px 0 14px; color: var(--muted); }
-  .tagline { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 10px; }
+  .tagline { font-size: 23px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 10px; }
   .hobby { white-space: nowrap; }
   .hobby :global(.icon) { vertical-align: -0.12em; margin-left: 5px; color: var(--muted); }
   .hobby :global(.icon + .icon) { margin-left: 2px; }
-  .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; font-size: 15px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; font-size: 16.5px; }
   .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
   .links a:hover { color: var(--text); text-decoration: none; }
 
+  /* Affiliations as stations on a metro line; the first (current) stop is highlighted. */
   .affiliations {
+    --gap: 24px;
     list-style: none;
     padding: 0;
-    margin: 0 0 44px;
+    margin: 8px 0 48px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    position: relative;
+    gap: var(--gap);
   }
-  .affiliations li { display: flex; flex-direction: column; gap: 2px; padding-top: 14px; border-top: 2px solid var(--rule); }
-  .affiliations li:first-child { border-top-color: var(--text); }
-  .aff-name { font-weight: 600; font-size: 15px; }
+  .affiliations li { position: relative; display: flex; flex-direction: column; gap: 2px; padding-top: 28px; }
+  .affiliations li::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 16px;
+    right: calc(-1 * var(--gap));
+    height: 2px;
+    background: #e2e2e2;
+  }
+  .affiliations li:last-child::after { display: none; }
+  .affiliations li.current::after { background: linear-gradient(to right, var(--accent), #e2e2e2 70%); }
+  .stop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #c9c9c9;
+    z-index: 1;
+  }
+  .current .stop { background: var(--accent); border-color: var(--accent); animation: pulse 2.4s ease-out infinite; }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(31, 95, 191, 0.35); }
+    70%, 100% { box-shadow: 0 0 0 9px rgba(31, 95, 191, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .current .stop { animation: none; box-shadow: 0 0 0 4px rgba(31, 95, 191, 0.15); } }
+  .aff-name { font-weight: 600; font-size: 17px; margin-top: 2px; }
   .faint { color: var(--faint); }
   .honor { color: var(--text); }
   .all-pubs { margin: 28px 0 0; }
@@ -176,13 +205,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .news { list-style: none; padding: 0; margin: 0; }
   .news li {
     display: grid;
-    grid-template-columns: 64px 64px 1fr;
-    gap: 12px;
+    grid-template-columns: 72px 70px 1fr;
+    gap: 14px;
     align-items: baseline;
-    padding: 7px 0;
-    font-size: 15.5px;
+    padding: 8px 0;
+    font-size: 17px;
   }
-  .tag { color: var(--faint); font-size: 11px; }
+  .tag { color: var(--faint); font-size: 12px; }
   details { margin-top: 10px; }
   summary { cursor: pointer; padding: 6px 0; }
   summary:hover { color: var(--text); }
@@ -190,13 +219,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .note { margin: -12px 0 20px; color: var(--faint); }
   .group { margin-bottom: 40px; }
   .group:last-child { margin-bottom: 0; }
-  h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
+  h3 { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
   .blurb { color: var(--muted); margin: 0 0 8px; }
   .project {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 24px;
-    padding: 20px 0;
+    grid-template-columns: 260px 1fr;
+    gap: 32px;
+    padding: 22px 0;
   }
   .media img, .media video, .media-placeholder { aspect-ratio: 4 / 3; border-radius: 6px; background: #fff; border: 1px solid var(--rule); }
   .media img, .media video { width: 100%; height: auto; object-fit: contain; display: block; }
@@ -208,24 +237,28 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     background-image: radial-gradient(#dcdcdc 1px, transparent 1px);
     background-size: 12px 12px;
   }
-  .credit { display: block; margin-top: 4px; font-size: 10.5px; color: var(--faint); }
-  h4 { font-size: 16.5px; font-weight: 600; line-height: 1.35; margin: 0 0 4px; }
-  .authors { font-size: 14.5px; color: var(--muted); margin: 0; }
+  .credit { display: block; margin-top: 4px; font-size: 11.5px; color: var(--faint); }
+  h4 { font-size: 18.5px; font-weight: 600; line-height: 1.35; margin: 0 0 4px; }
+  .authors { font-size: 16px; color: var(--muted); margin: 0; }
   .authors :global(b) { color: var(--text); font-weight: 600; }
   .venue { margin: 2px 0 6px; }
-  .summary { font-size: 15px; margin: 0 0 6px; color: #333; }
+  .summary { font-size: 16.5px; margin: 0 0 6px; color: #333; }
   .plinks { display: flex; gap: 14px; margin: 0; }
 
   .lead { padding: 8px 0 12px; }
   .lead-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
   .lead-name { color: var(--text); font-weight: 600; }
-  .lead p { margin: 4px 0 0; font-size: 15px; color: #333; }
+  .lead p { margin: 4px 0 0; font-size: 16.5px; color: #333; }
 
   @media (max-width: 640px) {
     .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 24px; }
     .photo { width: 104px; height: 104px; }
-    h1 { font-size: 28px; }
-    .affiliations { grid-template-columns: 1fr 1fr; }
+    h1 { font-size: 32px; }
+    .affiliations { grid-template-columns: 1fr; --gap: 20px; }
+    .affiliations li { padding: 0 0 0 32px; }
+    .affiliations li::after { top: 18px; left: 7px; right: auto; bottom: calc(-1 * var(--gap)); width: 2px; height: auto; }
+    .affiliations li.current::after { background: linear-gradient(to bottom, var(--accent), #e2e2e2 70%); }
+    .stop { top: 3px; }
     .news li { grid-template-columns: 58px 1fr; }
     .news li .tag { display: none; }
     .project { grid-template-columns: 1fr; gap: 12px; }
