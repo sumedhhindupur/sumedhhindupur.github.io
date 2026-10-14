@@ -30,13 +30,13 @@ export const interests = [
   { text: 'playing the guitar', icons: ['guitar', 'music'] },
 ] as const;
 
-// The affiliation row under the intro, newest first. The first one is highlighted as current.
+// The affiliation line under the intro, oldest first. The last one is highlighted as current.
 // `honor` (optional) shows as an extra line.
 export const affiliations = [
-  { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–Present' },
-  { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
-  { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
   { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23', honor: 'Institute Silver Medal (Rank 1/78)' },
+  { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
+  { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
+  { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–Present' },
 ];
 
 // The Leadership and Organization section after Research.

@@ -38,7 +38,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     <!-- Affiliations -->
     <ol class="affiliations">
       {affiliations.map((a, k) => (
-        <li class:list={{ current: k === 0 }}>
+        <li class:list={{ current: k === affiliations.length - 1 }}>
           <span class="stop" aria-hidden="true"></span>
           <span class="mono faint">{a.years}</span>
           <span class="aff-name">{a.name}</span>
@@ -158,7 +158,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
   .links a:hover { color: var(--text); text-decoration: none; }
 
-  /* Affiliations as stations on a metro line; the first (current) stop is highlighted. */
+  /* Affiliations as stations on a metro line; the last (current) stop is highlighted. */
   .affiliations {
     --gap: 24px;
     list-style: none;
@@ -179,7 +179,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     background: #e2e2e2;
   }
   .affiliations li:last-child::after { display: none; }
-  .affiliations li.current::after { background: linear-gradient(to right, var(--accent), #e2e2e2 70%); }
+  .affiliations li:nth-last-child(2)::after { background: linear-gradient(to right, #e2e2e2 30%, var(--accent)); }
   .stop {
     position: absolute;
     top: 0;
@@ -257,7 +257,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     .affiliations { grid-template-columns: 1fr; --gap: 20px; }
     .affiliations li { padding: 0 0 0 32px; }
     .affiliations li::after { top: 18px; left: 7px; right: auto; bottom: calc(-1 * var(--gap)); width: 2px; height: auto; }
-    .affiliations li.current::after { background: linear-gradient(to bottom, var(--accent), #e2e2e2 70%); }
+    .affiliations li:nth-last-child(2)::after { background: linear-gradient(to bottom, #e2e2e2 30%, var(--accent)); }
     .stop { top: 3px; }
     .news li { grid-template-columns: 58px 1fr; }
     .news li .tag { display: none; }
