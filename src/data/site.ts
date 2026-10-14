@@ -36,7 +36,7 @@ export const affiliations = [
   { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–Present' },
   { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
   { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
-  { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23', honor: 'Institute Silver Medal' },
+  { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23', honor: 'Institute Silver Medal (Rank 1/78)' },
 ];
 
 // The Leadership and Organization section after Research.
