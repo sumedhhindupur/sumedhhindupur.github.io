@@ -22,10 +22,38 @@ export const site = {
   ] as const,
 };
 
-// The affiliation row under the intro, oldest first.
+// Shown under the intro, before the contact links. Add a `url` to any item to make it a link.
+export const interestsLine = 'Outside research, I love long-distance running, playing tennis, reading books, and music, especially playing the guitar.';
+export const interests = [
+  { label: 'Running', icon: 'running' },
+  { label: 'Tennis', icon: 'tennis', url: 'https://harvardgraduatetennis.org/' },
+  { label: 'Books', icon: 'books' },
+  { label: 'Guitar', icon: 'guitar' },
+  { label: 'Music', icon: 'music' },
+] as const;
+
+// The affiliation row under the intro, newest first. The first one is highlighted as current.
 export const affiliations = [
-  { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23' },
-  { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
   { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–' },
   { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
+  { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
+  { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23' },
+];
+
+// The Leadership section after Research.
+export const leadership = [
+  {
+    name: 'PRISM Reading Club',
+    url: 'https://prism-interp-neuro.github.io/',
+    role: 'Co-founder',
+    years: '2025–',
+    text: 'A weekly reading group at Harvard SEAS and the Kempner Institute on the intersection of neuroscience and ML interpretability, with paper presentations and panel discussions.',
+  },
+  {
+    name: 'Harvard Graduate Tennis Club',
+    url: 'https://harvardgraduatetennis.org/',
+    role: 'Officer; former Co-President',
+    years: '',
+    text: '',
+  },
 ];

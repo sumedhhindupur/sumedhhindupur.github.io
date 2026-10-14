@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, affiliations } from '../data/site';
+import { site, affiliations, interests, interestsLine, leadership } from '../data/site';
 import { news, visibleCount } from '../data/news';
 import { groups, me } from '../data/research';
 import Icon from '../components/Icon.astro';
@@ -21,6 +21,12 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
       <div>
         <h1>{site.name}</h1>
         <p class="intro" set:html={site.intro} />
+        <p class="intro">{interestsLine}</p>
+        <p class="interests">
+          {interests.map((i) => 'url' in i
+            ? <a href={i.url}><Icon name={i.icon} />{i.label}</a>
+            : <span><Icon name={i.icon} />{i.label}</span>)}
+        </p>
         <p class="links">
           <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}><Icon name="mail" />Email</a>
           {site.links.map((l) => <a href={l.url}><Icon name={l.icon} />{l.label}</a>)}
@@ -90,6 +96,20 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
         </div>
       ))}
     </section>
+
+    <!-- Leadership -->
+    <section id="leadership">
+      <h2 class="section">Leadership</h2>
+      {leadership.map((l) => (
+        <div class="lead">
+          <div class="lead-head">
+            <a href={l.url} class="lead-name">{l.name}</a>
+            <span class="mono">{l.role}{l.years && ` · ${l.years}`}</span>
+          </div>
+          {l.text && <p>{l.text}</p>}
+        </div>
+      ))}
+    </section>
   </div>
 </Base>
 
@@ -123,6 +143,10 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
     margin: 0 0 10px;
   }
   .intro { margin: 0 0 14px; color: #333; max-width: 560px; }
+  .interests { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: -4px 0 18px; font-size: 14px; color: var(--muted); }
+  .interests > * { display: inline-flex; align-items: center; gap: 6px; }
+  .interests a { color: var(--muted); text-decoration: underline; text-decoration-color: var(--rule); text-underline-offset: 3px; }
+  .interests a:hover { color: var(--text); }
   .links { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 0; font-size: 15px; }
   .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
   .links a:hover { color: var(--text); text-decoration: none; }
@@ -137,7 +161,7 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
     position: relative;
   }
   .affiliations li { display: flex; flex-direction: column; gap: 2px; padding-top: 14px; border-top: 2px solid var(--rule); }
-  .affiliations li:nth-child(3) { border-top-color: var(--text); }
+  .affiliations li:first-child { border-top-color: var(--text); }
   .aff-name { font-weight: 600; font-size: 15px; }
   .faint { color: var(--faint); }
 
@@ -183,6 +207,11 @@ const initials = site.name.split(' ').map((w) => w[0]).join('');
   .venue { margin: 2px 0 6px; }
   .summary { font-size: 15px; margin: 0 0 6px; color: #333; }
   .plinks { display: flex; gap: 14px; margin: 0; }
+
+  .lead { padding: 8px 0 12px; }
+  .lead-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .lead-name { color: var(--text); font-weight: 600; }
+  .lead p { margin: 4px 0 0; font-size: 15px; color: #333; }
 
   @media (max-width: 640px) {
     .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 24px; }

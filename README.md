@@ -16,6 +16,8 @@ npm run build      # production build into dist/
 |---|---|
 | Name, photo, intro, links | `src/data/site.ts` (`site`) |
 | Affiliation row | `src/data/site.ts` (`affiliations`) |
+| Interests sentence and icon row | `src/data/site.ts` (`interestsLine`, `interests`) |
+| Leadership section | `src/data/site.ts` (`leadership`) |
 | News | `src/data/news.ts`, newest first; `visibleCount` sets how many show before "Older news" |
 | Research projects and themes | `src/data/research.ts` |
 | CV | replace `public/cv.pdf` |
@@ -23,7 +25,7 @@ npm run build      # production build into dist/
 
 **Email:** stored as two parts (`email.user`, `email.domain`) in `site.ts`, so the full address never appears in the page source or this repo. The footer shows it as `name [at] gmail [dot] com`, and email links build the `mailto:` only when clicked.
 
-**Links and icons:** each entry in `links` has an `icon`: `scholar`, `github`, `linkedin`, `x`, `bluesky` or `cv`.
+**Links and icons:** each entry in `links` has an `icon`: `scholar`, `github`, `linkedin`, `x`, `bluesky` or `cv`; interests can use `running`, `tennis`, `books`, `guitar` or `music`.
 
 **Photo:** save as `public/photo.jpg`, then set `photo: '/photo.jpg'` in `site.ts`.
 
