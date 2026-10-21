@@ -51,7 +51,6 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'n
       <span class="mono">© {new Date().getFullYear()} {site.name} · Last updated {updated}</span>
     </footer>
     <script>
-      // Builds the mailto: link only on click, so the address never appears in the page source.
       // The address is assembled only when someone points at, focuses or taps the link, so it never
       // appears in the page source; after that it is an ordinary mailto: link.
       document.querySelectorAll<HTMLAnchorElement>('a.js-email').forEach((a) => {
