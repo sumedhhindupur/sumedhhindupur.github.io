@@ -9,8 +9,8 @@ import { groups, me } from '../data/research';
 // Newspaper-style headline and subhead for each paper, keyed by the start of its title.
 const headlines: Record<string, { head: string; sub: string }> = {
   'When Models': {
-    head: 'Language Models Don’t Manipulate Manifolds, Study Finds',
-    sub: 'Curved number representations sit idle as the model compares numbers along straight lines',
+    head: 'Language Models Don’t Always Manipulate Manifolds',
+    sub: 'Curved number representations exist',
   },
   'Projecting Assumptions': {
     head: 'Sparse Autoencoders Harbor Hidden Assumptions, Researchers Warn',
@@ -40,9 +40,7 @@ const fields = site.keywords.map((k) => k.toLowerCase());
 const fieldList = fields.slice(0, -1).join(', ') + ' and ' + fields[fields.length - 1];
 
 const now = new Date();
-const dateline = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' }).toUpperCase();
 const volume = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'][now.getFullYear() - 2023] ?? String(now.getFullYear() - 2022);
-const issue = Math.floor((now.getTime() - new Date(now.getFullYear(), 0, 0).getTime()) / 86400000);
 const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 ---
 <!doctype html>
@@ -76,8 +74,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
       <p class="personal">The personal website of {site.name}</p>
       <div class="dateline">
         <span>Cambridge, Mass.</span>
-        <span>{dateline}</span>
-        <span>Vol. {volume} · No. {issue}</span>
+        <span>Established 2023</span>
+        <span>Vol. {volume}</span>
       </div>
 
       <!-- Front page: profile of Sumedh + bulletins -->
@@ -88,12 +86,12 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
           <p class="deck">The Harvard researcher studies {fieldList}.</p>
           <figure class="halftone">
             <img src={site.photo ?? '/photo.jpg'} alt={`${site.name} giving a talk`} />
-            <figcaption>{surname} explains how features inside language models respond to concepts, during a talk at IIT Bombay.</figcaption>
+            <figcaption>{site.name.split(' ')[0]} giving a talk at his alma mater, IIT Bombay.</figcaption>
           </figure>
           <p class="byline">By Our Staff Correspondent</p>
           <div class="columns-2">
             <p class="dropcap">{site.name} is a <span set:html={site.position} /> {surname}’s latest work, reported in this edition, finds that language models compare numbers along straight lines, even though they represent them on curved manifolds.</p>
-            <p>Before Harvard, {surname} studied electrical engineering at IIT Bombay, graduating at the top of the class with the Institute Silver Medal, and interned at Hokkaido University and NTT Research.</p>
+            <p>Originally from Hyderabad, India, {surname} studied electrical engineering at IIT Bombay, graduating at the top of the class with the Institute Silver Medal, and has interned at Hokkaido University and NTT Research.</p>
             <p>Away from the lab, {surname} enjoys {interests.map((i, k) => (
               <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
             ))}.</p>
@@ -182,20 +180,19 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         <div class="classifieds">
           <h3 class="section-head">Classifieds</h3>
           <div class="ad">
-            <b>WANTED.</b> Postdoctoral position in representation geometry &amp; interpretability. Serious inquiries only. <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>Write to the editor.</a>
+            <b>WANTED.</b> Jobs: postdoc and industry positions in representation geometry and interpretability. <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>Write to the editor.</a>
           </div>
           <div class="ad">
-            <b>FOUND.</b> One curved number manifold, barely used. Owner may claim at arXiv.
+            <b>FOUND.</b> Beauty within the tangled mess of intelligence.
           </div>
           <div class="ad">
-            <b>SEEKING</b> tennis partners, intermediate and above. Weekends.
+            <b>SEEKING.</b> Peace.
           </div>
         </div>
       </section>
 
       <footer class="colophon">
         <span>Printed in Cambridge, Massachusetts · © {now.getFullYear()} {site.name}</span>
-        <a href="/">Return to the modern edition →</a>
       </footer>
     </div>
 
@@ -271,12 +268,14 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 
   /* Halftone photo: greyscale, high contrast, with a printed dot screen on top. */
   .halftone { position: relative; margin: 0 0 4px; }
-  .halftone img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: grayscale(1) contrast(1.25) brightness(1.05); }
+  .halftone img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; filter: grayscale(1) contrast(1.25) brightness(1.05); transition: filter 0.3s; }
+  .halftone:hover img { filter: none; }
   .halftone::after {
     content: ''; position: absolute; inset: 0 0 auto 0; aspect-ratio: 16 / 9; pointer-events: none;
     background-image: radial-gradient(rgba(27, 26, 23, 0.35) 0.9px, transparent 1.3px);
-    background-size: 4px 4px; mix-blend-mode: multiply;
+    background-size: 4px 4px; mix-blend-mode: multiply; transition: opacity 0.3s;
   }
+  .halftone:hover::after { opacity: 0; }
   figcaption { font-family: var(--label); font-size: 13px; font-style: italic; margin-top: 6px; color: var(--ink-soft); }
 
   .bulletin { padding: 8px 0 10px; border-bottom: 1px dotted rgba(27, 26, 23, 0.5); }
