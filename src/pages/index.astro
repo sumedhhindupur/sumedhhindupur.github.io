@@ -116,7 +116,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
             <span class="portrait"><img src="/portrait.jpg" alt={`Portrait of ${site.name}`} /></span>
             <p class="byline"><b>{site.name}</b><br />Profiled by Our Staff Correspondent</p>
           </div>
-          <div class="columns-2">
+          <div class="profile-text">
             <p class="dropcap">{site.name}, originally from Hyderabad, India, is a <span set:html={site.position} /> {first}’s latest work, reported in this edition, finds that language models compare numbers along straight lines, even though they represent them on curved manifolds.</p>
             <div class="reach">
               <p class="reach-title">To reach our subject</p>
@@ -313,6 +313,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .portrait:hover::after { opacity: 0; }
   .columns-2 { column-count: 2; column-gap: 28px; column-rule: 1px solid rgba(27, 26, 23, 0.35); text-align: justify; hyphens: auto; }
   .columns-2 p { margin: 0 0 12px; }
+  .profile-text { text-align: justify; hyphens: auto; }
+  .profile-text .dropcap { margin: 0 0 12px; font-size: 18px; }
   .dropcap::first-letter { font-family: var(--display); font-weight: 900; float: left; font-size: 64px; line-height: 0.85; padding: 4px 8px 0 0; }
   .cont { font-style: italic; }
 
