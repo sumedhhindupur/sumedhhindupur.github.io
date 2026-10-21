@@ -37,7 +37,7 @@ export const interests = [
 export const affiliations = [
   { name: 'IIT Bombay', role: 'B.Tech + M.Tech, EE', years: '2018–23', honor: 'Institute Silver Medal (Rank\u00a01/78)' },
   { name: 'Hokkaido University', role: 'Research intern (remote)', years: '2020–23' },
-  { name: 'NTT Research', role: 'Intern, Physics of AI', years: '2025' },
+  { name: 'NTT Research', role: 'Intern, Physics of AI (during PhD)', years: '2025' },
   { name: 'Harvard University', role: 'PhD, Applied Math', years: '2023–Present' },
 ];
 

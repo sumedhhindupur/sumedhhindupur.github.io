@@ -117,11 +117,11 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
             <p class="byline"><b>{site.name}</b><br />Profiled by Our Staff Correspondent</p>
           </div>
           <div class="columns-2">
-            <p class="dropcap">{site.name}, originally from Hyderabad, India, is a <span set:html={site.position} /> {first}’s research spans {fieldList}.</p>
+            <p class="dropcap">{site.name}, originally from Hyderabad, India, is a <span set:html={site.position} /> {first} studies how neural networks, in language models and in the mouse visual cortex, represent and compute with information.</p>
             <p>{first} studied electrical engineering at IIT Bombay, graduating at the top of the class with the Institute Silver Medal, and has interned at Hokkaido University and NTT Research.</p>
             <p>Away from the lab, {first} enjoys {interests.map((i, k) => (
               <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
-            ))}.</p>
+            ))}, though rarely all on the same day.</p>
             <div class="reach">
               <p class="reach-title">To reach our subject</p>
               <p class="reach-links">
@@ -206,14 +206,6 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
           {leadership.map((l) => (
             <p><a href={l.url}><b>{l.name}</b></a>. {societyShort[l.name] ?? `${l.role}. ${l.text}`}</p>
           ))}
-        </div>
-        <div class="sports">
-          <h3 class="section-head">Sports &amp; Leisure</h3>
-          <p>
-            Our correspondent reports that {first} has been spotted {interests.map((i, k) => (
-              <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
-            ))}, though rarely all on the same day.
-          </p>
         </div>
         <div class="classifieds" id="classifieds">
           <h3 class="section-head">Classifieds</h3>
@@ -312,7 +304,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .portrait::after { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(27, 26, 23, 0.3) 0.7px, transparent 1.1px); background-size: 3px 3px; mix-blend-mode: multiply; transition: opacity 0.3s; }
   .portrait:hover img { filter: none; }
   .portrait:hover::after { opacity: 0; }
-  .columns-2 { column-count: 2; column-gap: 28px; column-rule: 1px solid rgba(27, 26, 23, 0.35); text-align: justify; hyphens: auto; }
+  .columns-2 { column-count: 2; column-gap: 28px; column-rule: 1px solid rgba(27, 26, 23, 0.35); text-align: left; hyphens: auto; }
   .columns-2 p { margin: 0 0 12px; }
   .dropcap::first-letter { font-family: var(--display); font-weight: 900; float: left; font-size: 64px; line-height: 0.85; padding: 4px 8px 0 0; }
   .cont { font-style: italic; }
@@ -373,7 +365,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .all-pubs { font-family: var(--label); font-style: italic; text-align: center; font-size: 14px; margin: 8px 0 24px; padding-top: 10px; border-top: 3px double var(--rule); }
 
   /* Back page */
-  .back-page { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 0; }
+  .back-page { display: grid; grid-template-columns: 1.6fr 1fr; gap: 0; }
   .back-page > div { padding: 0 22px; border-left: 1px solid var(--rule); }
   .back-page > div:first-child { padding-left: 0; border-left: none; }
   .back-page p { font-size: 15.5px; text-align: justify; hyphens: auto; }

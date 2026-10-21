@@ -10,6 +10,12 @@ npm run dev        # http://localhost:4321, reloads as you edit
 npm run build      # production build into dist/
 ```
 
+## Pages
+
+- `/`: **The Hindupur Gazette**, the homepage styled as an old broadsheet newspaper (`src/pages/index.astro`). The headlines, motto, profile wording and classifieds are written in that file; everything else comes from the data files below.
+- `/plain/`: the **plain edition**, the earlier homepage restyled as a 1990s page, with a visitor counter (`src/pages/plain.astro`; its look is the `body.plain` block at the end of `src/styles/global.css`).
+- `/writing/`: the Gazette's "Writing Desk", currently a coming-soon notice (`src/pages/writing/index.astro`).
+
 ## Editing content (no HTML needed)
 
 | What | File |
@@ -62,8 +68,10 @@ If you move to a custom domain, update `site` in `astro.config.mjs` and add the 
 - `src/components/Icon.astro`: inline SVG icons (brand logos from Simple Icons, mail/CV from Lucide), sized to the surrounding text and colored with `currentColor`.
 - Email protection: links with class `js-email` carry the address split across `data-u` / `data-d`; a small script in `Base.astro` joins them into a `mailto:` on click.
 - `src/content/config.ts`: the schema for blog posts (title, date, category, description, draft). Astro validates every post's front matter against it at build time.
-- `src/components/PostList.astro`: the Writing page. Takes a `category`, loads the matching posts (drafts only in dev), sorts them newest first, and renders the Research | Personal tabs plus the list.
-- `src/pages/writing/index.astro` and `personal.astro`: the two tabs. Each renders `PostList` with its category.
+- `src/pages/index.astro` (Gazette): `headlines` maps each paper to its newspaper headline; the profile, "The Story So Far" timeline, bulletins (5 shown, rest folded), research articles, Society Pages and Classifieds follow. Photos are greyscale with a dot screen and turn colour on hover.
+- `src/pages/plain.astro`: the earlier homepage markup rendered with `<Base plain>`; the counter fetches the public total from GoatCounter and stays hidden if that fails.
+- `src/pages/writing/index.astro`: standalone Gazette-styled coming-soon page.
+- Link previews: `public/og.png` (1200×630) is referenced by the `og:image` tags on every page.
 - `src/pages/writing/[...slug].astro`: one page per post. `getStaticPaths` builds a page for every non-draft post; the page renders the Markdown with post typography (wider line height, figure captions, code blocks).
 - `.github/workflows/deploy.yml`: the build-and-deploy job using the official `withastro/action` and `actions/deploy-pages`.
 
