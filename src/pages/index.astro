@@ -71,10 +71,11 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         </div>
         <div class="ear right">
           <span class="ear-title">Late Edition</span>
-          Price: one citation.<br /><a href="/plain/">Plain edition</a>
+          Price: one citation
         </div>
       </header>
       <p class="personal">The personal website of {site.name}</p>
+      <p class="plain-link">Not a newspaper reader? <a href="/plain/">Read the plain edition →</a></p>
       <div class="dateline">
         <span>Cambridge, Mass.</span>
         <span>Established 2023</span>
@@ -241,6 +242,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 
   /* Masthead */
   .masthead { display: grid; grid-template-columns: 180px 1fr 180px; align-items: center; gap: 20px; padding-bottom: 6px; }
+  .plain-link { text-align: center; font-family: var(--display); font-style: italic; font-size: 15px; margin: 0; padding: 0 0 6px; }
   .personal { text-align: center; font-family: var(--label); text-transform: uppercase; letter-spacing: 0.22em; font-size: 13px; margin: 0; padding: 6px 0; border-top: 3px double var(--rule); }
   .ear { border: 1px solid var(--rule); padding: 8px 10px; font-family: var(--label); font-size: 13px; line-height: 1.35; text-align: center; }
   .ear-title { display: block; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; margin-bottom: 2px; }
