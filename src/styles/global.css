@@ -63,33 +63,63 @@ h2.section {
 
 section { padding: 44px 0; border-top: 1px solid var(--rule); }
 
-/* ---------- Plain edition: same layout, no decoration, old-school type ---------- */
+/* ---------- Plain edition: same layout, styled like a 1990s homepage ---------- */
 body.plain {
   --font-sans: 'Times New Roman', Times, serif;
   --font-mono: 'Courier New', Courier, monospace;
   --text: #000;
-  --muted: #444;
-  --faint: #666;
-  --rule: #bbb;
+  --muted: #222;
+  --faint: #333;
+  --rule: #808080;
   --navy: #000;
   --amber: #000;
   --rust: #000;
   --green: #000;
   --accent: #0000ee;
-  background: #fff;
+  --surface: #fff;
+  background: #c0c0c0;
+  font-size: 17px;
+  -webkit-font-smoothing: auto;
 }
-body.plain a { text-decoration: underline; }
+body.plain a { color: #0000ee; text-decoration: underline; }
 body.plain a:visited { color: #551a8b; }
-body.plain a:hover { text-decoration-color: currentColor; }
-body.plain .edition-note { font-style: italic; color: #444; margin: 8px 0 0; }
-body.plain .tag { background: none !important; color: #444 !important; padding: 0; }
-body.plain h3::before { display: none; }
-body.plain .blurb { padding-left: 0; }
-body.plain .current .stop { animation: none !important; box-shadow: none !important; background: #000 !important; border-color: #000 !important; }
-body.plain .affiliations li::after,
-body.plain .affiliations li:nth-last-child(2)::after { background: #bbb !important; }
-body.plain .photo { border-radius: 0; box-shadow: none; }
-body.plain .media img, body.plain .media video, body.plain .media-placeholder { border-radius: 0; }
-body.plain .project:hover .media img, body.plain .project:hover .media video { border-color: #bbb; box-shadow: none; }
-body.plain .hobby .icon, body.plain .links a, body.plain .keywords { color: inherit; }
-body.plain .honor { color: #000; font-style: italic; }
+body.plain a:hover { color: #0000ee; text-decoration-color: currentColor; }
+body.plain .brand, body.plain nav a { color: #0000ee !important; text-decoration: underline !important; }
+body.plain .edition-note { font-style: italic; margin: 8px 0 0; }
+
+/* Grooved rules and Times headings instead of small mono labels */
+body.plain section { border-top: 2px groove #f0f0f0; }
+body.plain footer { border-top: 2px groove #f0f0f0; }
+body.plain h2.section { font-family: var(--font-sans) !important; text-transform: none !important; letter-spacing: 0 !important; font-size: 26px !important; font-weight: bold !important; color: #000 !important; }
+body.plain h1 { font-weight: bold !important; letter-spacing: 0 !important; }
+body.plain h3, body.plain h4 { letter-spacing: 0 !important; }
+body.plain h3::before { display: none !important; }
+body.plain .blurb { padding-left: 0 !important; color: #222 !important; }
+body.plain .position, body.plain .intro, body.plain .summary, body.plain .authors, body.plain .lead p { color: #000 !important; }
+
+/* No icons: plain text links */
+body.plain .icon { display: none !important; }
+body.plain .links a { color: #0000ee !important; }
+body.plain .keywords { color: #000 !important; }
+
+/* Photo and figures in thin black frames */
+body.plain .photo { border-radius: 0 !important; box-shadow: none !important; border: 2px solid #000; }
+body.plain .media img, body.plain .media video, body.plain .media-placeholder { border-radius: 0 !important; border: 1px solid #000 !important; box-shadow: none !important; }
+body.plain .project:hover .media img { border-color: #000 !important; box-shadow: none !important; }
+
+/* Timeline as an old bevelled HTML table */
+body.plain .affiliations { gap: 0 !important; border: 2px outset #e0e0e0; background: #d4d4d4; padding: 2px; }
+body.plain .affiliations li { padding: 8px 10px !important; border: 1px inset #e0e0e0; margin: 2px; }
+body.plain .affiliations li::after, body.plain .stop { display: none !important; }
+body.plain .affiliations .aff-name { font-size: 17px !important; }
+body.plain .honor { color: #000 !important; font-style: italic; }
+
+/* News tags in [BRACKETS], with a blinking NEW! on the latest item */
+body.plain .tag { background: none !important; color: #000 !important; padding: 0 !important; font-weight: normal !important; }
+body.plain .tag::before { content: '['; }
+body.plain .tag::after { content: ']'; }
+body.plain #news > .news > li:first-child > span:last-child::after { content: ' NEW!'; color: #ff0000; font-weight: bold; font-family: var(--font-sans); animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { body.plain #news > .news > li:first-child > span:last-child::after { animation: none; } }
+
+body.plain footer::after { content: 'Best viewed with Netscape Navigator 4.0 at 800×600.'; display: block; width: 100%; font-family: var(--font-mono); font-size: 12px; color: #333; margin-top: 6px; }
