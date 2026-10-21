@@ -36,6 +36,11 @@ const headlineFor = (title: string) =>
 const first = site.name.split(' ')[0];
 const boldMe = (authors: string) => authors.replace(me, `<b>${me}</b>`);
 const papers = groups.flatMap((g) => g.projects.map((p) => ({ ...p, theme: g.theme })));
+// One-sentence Society Pages entries (the full text is on the plain edition).
+const societyShort: Record<string, string> = {
+  'PRISM Reading Club': 'Co-founder (2025–Present) of a weekly reading group on neuroscience and ML interpretability at Harvard SEAS and the Kempner Institute.',
+  'Harvard Graduate Tennis Club': 'Officer (2024–Present) and former Co-President (2024–25) of the largest graduate club at Harvard.',
+};
 const bulletins = news.slice(0, 5);
 const earlier = news.slice(5);
 const fields = site.keywords.map((k) => k.toLowerCase());
@@ -195,7 +200,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         <div class="society" id="society">
           <h3 class="section-head">Society Pages</h3>
           {leadership.map((l) => (
-            <p><a href={l.url}><b>{l.name}</b></a>, {l.role}{l.years && `, ${l.years}`}. {l.text}</p>
+            <p><a href={l.url}><b>{l.name}</b></a>. {societyShort[l.name] ?? `${l.role}. ${l.text}`}</p>
           ))}
         </div>
         <div class="sports">
