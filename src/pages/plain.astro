@@ -1,0 +1,97 @@
+---
+// The plain edition: a bare-bones, 1990s-style homepage with the same content as the Gazette.
+// Deliberately almost no styling: Times, default link colours, horizontal rules and lists.
+import { site, affiliations, interests, leadership } from '../data/site';
+import { news } from '../data/news';
+import { groups, me } from '../data/research';
+
+const boldMe = (authors: string) => authors.replace(me, `<b>${me}</b>`);
+const updated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{site.name}</title>
+    <meta name="description" content={`Homepage of ${site.name}.`} />
+    <!-- Private visitor stats (no cookies): https://sumedhhindupur.goatcounter.com -->
+    <script is:inline data-goatcounter="https://sumedhhindupur.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+    <style is:inline>
+      body { font-family: "Times New Roman", Times, serif; font-size: 18px; line-height: 1.45; max-width: 760px; margin: 0 auto; padding: 16px; background: #fff; color: #000; }
+      img { max-width: 100%; }
+    </style>
+  </head>
+  <body>
+    <p><i>This is the plain edition. The illustrated edition is <a href="/">The Hindupur Gazette</a>.</i></p>
+    <hr />
+
+    <h1>{site.name}</h1>
+    <img src={site.photo ?? '/photo.jpg'} alt={`${site.name} giving a talk`} width="320" />
+    <p><span set:html={site.position} /> {site.tagline}</p>
+    <p>Research interests: {site.keywords.join(', ')}.</p>
+    <p>
+      Originally from Hyderabad, India. Outside research, I enjoy {interests.map((i, k) => (
+        <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
+      ))}.
+    </p>
+    <p>
+      Email: <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>{site.email.user} [at] {site.email.domain.replace('.', ' [dot] ')}</a><br />
+      {site.links.map((l, k) => <>{k > 0 && ' | '}<a href={l.url}>{l.label}</a></>)}
+    </p>
+
+    <hr />
+    <h2>News</h2>
+    <ul>
+      {news.map((n) => <li>{n.date}: <span set:html={n.text} /></li>)}
+    </ul>
+
+    <hr />
+    <h2>Research</h2>
+    <p>(† denotes equal contribution. Full list on <a href={site.links.find((l) => l.icon === 'scholar')?.url}>Google Scholar</a>.)</p>
+    {groups.map((g) => (
+      <>
+        <h3>{g.theme}</h3>
+        <ul>
+          {g.projects.map((p) => (
+            <li>
+              {p.links[0] ? <a href={p.links[0].url}>{p.title}</a> : p.title}.<br />
+              <span set:html={boldMe(p.authors.replace(/\.$/, ''))} />. <i>{p.venue}</i>.<br />
+              {p.summary}
+            </li>
+          ))}
+        </ul>
+      </>
+    ))}
+
+    <hr />
+    <h2>Education and Experience</h2>
+    <ul>
+      {[...affiliations].reverse().map((a) => (
+        <li>{a.years}: {a.name}, {a.role}.{a.honor && ` ${a.honor}.`}</li>
+      ))}
+    </ul>
+
+    <hr />
+    <h2>Leadership and Organization</h2>
+    <ul>
+      {leadership.map((l) => (
+        <li><a href={l.url}>{l.name}</a>, {l.role}{l.years && `, ${l.years}`}. {l.text}</li>
+      ))}
+    </ul>
+
+    <hr />
+    <p><a href={site.links.find((l) => l.icon === 'cv')?.url}>CV (PDF)</a></p>
+    <p><small>Last modified: {updated}</small></p>
+
+    <script>
+      // Builds the mailto: link only on click, so the address never appears in the page source.
+      document.querySelectorAll<HTMLAnchorElement>('a.js-email').forEach((a) => {
+        a.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = 'mailto:' + a.dataset.u + '@' + a.dataset.d;
+        });
+      });
+    </script>
+  </body>
+</html>
