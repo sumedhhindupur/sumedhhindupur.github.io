@@ -182,10 +182,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
                 <div class="feature-text">
                   <p class="kicker">{p.theme}</p>
                   <h4>{h.head}</h4>
-                  {h.sub && <p class="feature-deck">{h.sub}</p>}
+                  {h.sub && k === 0 && <p class="feature-deck">{h.sub}</p>}
                   <p class="feature-meta"><i>{p.title}</i> · {p.venue}</p>
-                  <p class="feature-authors" set:html={boldMe(p.authors)} />
-                  <p>{p.summary}</p>
+                  <details class="more" open={k === 0}>
+                    <summary>Read more</summary>
+                    <p class="feature-authors" set:html={boldMe(p.authors)} />
+                    <p>{p.summary}</p>
+                  </details>
                   {p.links.length > 0 && <p class="feature-links">{p.links.map((l) => <a href={l.url}>{l.label} →</a>)}</p>}
                 </div>
               </article>
@@ -362,6 +365,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .feature-authors { font-size: 14px; margin: 0 0 8px; color: var(--ink-soft); }
   .feature p { text-align: justify; hyphens: auto; }
   .feature p.feature-deck, .feature p.feature-meta, .feature p.feature-authors, .feature p.kicker { text-align: left; }
+  .more summary { cursor: pointer; font-family: var(--label); font-style: italic; font-size: 14px; margin: 4px 0 6px; }
+  .more[open] summary { display: none; }
   .feature-links { display: flex; gap: 16px; font-family: var(--label); font-style: italic; font-size: 15px; }
   .feature-fig { margin: 0 0 10px; }
   .feature-fig img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #fff; border: 1px solid var(--rule); filter: grayscale(1) contrast(1.1) sepia(0.15); transition: filter 0.3s; }
