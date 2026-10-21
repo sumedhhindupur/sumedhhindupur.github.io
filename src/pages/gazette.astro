@@ -1,6 +1,7 @@
 ---
-// "The Hindupur Gazette": the whole homepage restyled as an old broadsheet newspaper.
-// Reuses the same data files as the main site; only the headlines below are written for this page.
+// "The Hindupur Gazette": Sumedh's personal site restyled as an old broadsheet newspaper.
+// The front page is a profile of Sumedh; research follows as newspaper articles.
+// Reuses the main site's data files; only the headlines and newspaper copy are written here.
 import { site, affiliations, interests, leadership } from '../data/site';
 import { news } from '../data/news';
 import { groups, me } from '../data/research';
@@ -31,15 +32,12 @@ const headlines: Record<string, { head: string; sub: string }> = {
 const headlineFor = (title: string) =>
   headlines[Object.keys(headlines).find((k) => title.startsWith(k)) ?? ''] ?? { head: title, sub: '' };
 
+const surname = site.name.split(' ').slice(-1)[0];
 const boldMe = (authors: string) => authors.replace(me, `<b>${me}</b>`);
 const papers = groups.flatMap((g) => g.projects.map((p) => ({ ...p, theme: g.theme })));
-const lead = papers[0];
-const leadHead = headlineFor(lead.title);
 const bulletins = news.slice(0, 8);
-// The lead story is on the front page, so the Features pages list everything else.
-const featureGroups = groups
-  .map((g) => ({ ...g, projects: g.projects.filter((p) => p.title !== lead.title) }))
-  .filter((g) => g.projects.length > 0);
+const fields = site.keywords.map((k) => k.toLowerCase());
+const fieldList = fields.slice(0, -1).join(', ') + ' and ' + fields[fields.length - 1];
 
 const now = new Date();
 const dateline = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' }).toUpperCase();
@@ -52,8 +50,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>The Hindupur Gazette</title>
-    <meta name="description" content="The research of Sumedh Hindupur, as reported by The Hindupur Gazette." />
+    <title>{site.name} · The Hindupur Gazette</title>
+    <meta name="description" content={`The personal website of ${site.name}, printed as a newspaper.`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet" />
@@ -75,30 +73,37 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
           Price: one citation
         </div>
       </header>
+      <p class="personal">The personal website of {site.name}</p>
       <div class="dateline">
         <span>Cambridge, Mass.</span>
         <span>{dateline}</span>
         <span>Vol. {volume} · No. {issue}</span>
       </div>
 
-      <!-- Front page: lead story + bulletins -->
+      <!-- Front page: profile of Sumedh + bulletins -->
       <section class="front">
         <article class="lead">
-          <p class="kicker">{lead.theme}</p>
-          <h2 class="lead-head">{leadHead.head}</h2>
-          {leadHead.sub && <p class="deck">{leadHead.sub}</p>}
+          <p class="kicker">Profile</p>
+          <h2 class="lead-head">{site.name} Reads the Minds of AI Models and Animals</h2>
+          <p class="deck">The Harvard researcher studies {fieldList}.</p>
           <figure class="halftone">
             <img src={site.photo ?? '/photo.jpg'} alt={`${site.name} giving a talk`} />
-            <figcaption>{site.name} explains how features inside language models respond to concepts, at IIT Bombay.</figcaption>
+            <figcaption>{surname} explains how features inside language models respond to concepts, during a talk at IIT Bombay.</figcaption>
           </figure>
-          <p class="byline">By {site.name.toUpperCase()}, Staff Researcher</p>
+          <p class="byline">By Our Staff Correspondent</p>
           <div class="columns-2">
-            <p class="dropcap">{lead.summary}</p>
-            <p>
-              The work, by <span set:html={boldMe(lead.authors)} />, is available as a {lead.venue.toLowerCase()}.
-              {site.name.split(' ')[1]} is a {site.position.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').replace(/\.$/, '').replace('PhD candidate', 'doctoral candidate')}.
-            </p>
-            {lead.links[0] && <p class="cont"><a href={lead.links[0].url}>Read the full paper →</a></p>}
+            <p class="dropcap">{site.name} is a <span set:html={site.position} /> {surname}’s latest work, reported in this edition, finds that language models compare numbers along straight lines, even though they represent them on curved manifolds.</p>
+            <p>Before Harvard, {surname} studied electrical engineering at IIT Bombay, graduating at the top of the class with the Institute Silver Medal, and interned at Hokkaido University and NTT Research.</p>
+            <p>Away from the lab, {surname} enjoys {interests.map((i, k) => (
+              <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
+            ))}.</p>
+            <div class="reach">
+              <p class="reach-title">To reach our subject</p>
+              <p class="reach-links">
+                <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>Correspondence</a>
+                {site.links.map((l) => <a href={l.url}>{l.label}</a>)}
+              </p>
+            </div>
           </div>
         </article>
 
@@ -113,41 +118,44 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         </aside>
       </section>
 
-      <!-- Profile -->
-      <section class="profile">
-        <h3 class="section-head">The Researcher in Brief</h3>
-        <blockquote class="pullquote">“{site.tagline}”</blockquote>
-        <p class="profile-line">
-          <span set:html={site.position} />
-          {' '}Fields: {site.keywords.join(', ')}.
-        </p>
-        <p class="profile-links">
-          <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>Correspondence</a>
-          {site.links.map((l) => <a href={l.url}>{l.label}</a>)}
-        </p>
+      <!-- Trajectory -->
+      <section class="archives">
+        <h3 class="section-head">From Our Archives: The Road to Harvard</h3>
+        <ol class="road">
+          {affiliations.map((a, k) => (
+            <li class:list={{ now: k === affiliations.length - 1 }}>
+              <span class="road-years">{a.years}</span>
+              <span class="road-name">{a.name}</span>
+              <span class="road-role">{a.role}</span>
+              {a.honor && <span class="road-honor">{a.honor}</span>}
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <!-- Features: every research paper as an article, grouped by theme -->
+      <!-- Research -->
       <section class="features">
-        <h3 class="section-head">Features</h3>
+        <h3 class="section-head">Latest Research</h3>
         <div class="feature-grid">
-          {featureGroups.flatMap((g) => g.projects.map((p) => ({ ...p, theme: g.theme }))).map((p) => {
+          {papers.map((p, k) => {
             const h = headlineFor(p.title);
             return (
-              <article class="feature">
-                <p class="kicker">{p.theme}</p>
+              <article class:list={['feature', { top: k === 0 }]}>
                 {p.media && (
                   <figure class="feature-fig">
                     <img src={p.media} alt="" loading="lazy" />
                     {p.credit && <figcaption>Illustration: {p.credit.text.replace('© ', '')}</figcaption>}
                   </figure>
                 )}
-                <h4>{h.head}</h4>
-                {h.sub && <p class="feature-deck">{h.sub}</p>}
-                <p class="feature-meta"><i>{p.title}</i> · {p.venue}</p>
-                <p class="feature-authors" set:html={boldMe(p.authors)} />
-                <p>{p.summary}</p>
-                {p.links.length > 0 && <p class="feature-links">{p.links.map((l) => <a href={l.url}>{l.label} →</a>)}</p>}
+                <div class="feature-text">
+                  <p class="kicker">{p.theme}</p>
+                  <h4>{h.head}</h4>
+                  {h.sub && <p class="feature-deck">{h.sub}</p>}
+                  <p class="feature-meta"><i>{p.title}</i> · {p.venue}</p>
+                  <p class="feature-authors" set:html={boldMe(p.authors)} />
+                  <p>{p.summary}</p>
+                  {p.links.length > 0 && <p class="feature-links">{p.links.map((l) => <a href={l.url}>{l.label} →</a>)}</p>}
+                </div>
               </article>
             );
           })}
@@ -155,17 +163,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
       </section>
       <p class="all-pubs">Complete listings available at the <a href={scholar}>Google Scholar office</a>. † denotes equal contribution.</p>
 
-      <!-- Archives, society, sports, classifieds -->
+      <!-- Back page -->
       <section class="back-page">
-        <div class="archives">
-          <h3 class="section-head">From Our Archives</h3>
-          {[...affiliations].reverse().map((a) => (
-            <p class="archive">
-              <span class="a-years">{a.years}</span>
-              <b>{a.name}</b>, {a.role}.{a.honor && <> <i>Awarded the {a.honor}.</i></>}
-            </p>
-          ))}
-        </div>
         <div class="society">
           <h3 class="section-head">Society Pages</h3>
           {leadership.map((l) => (
@@ -175,11 +174,13 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         <div class="sports">
           <h3 class="section-head">Sports &amp; Leisure</h3>
           <p>
-            When not at the lab bench, our correspondent is known for {interests.map((i, k) => (
-              <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
-            ))}.
+            Our correspondent reports that {surname} has been spotted {interests.map((i, k) => (
+              <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{i.text}</>
+            ))}, though rarely all on the same day.
           </p>
-          <h3 class="section-head classifieds-head">Classifieds</h3>
+        </div>
+        <div class="classifieds">
+          <h3 class="section-head">Classifieds</h3>
           <div class="ad">
             <b>WANTED.</b> Postdoctoral position in representation geometry &amp; interpretability. Serious inquiries only. <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>Write to the editor.</a>
           </div>
@@ -238,7 +239,8 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .paper { max-width: 1200px; margin: 0 auto; padding: 24px 40px 40px; }
 
   /* Masthead */
-  .masthead { display: grid; grid-template-columns: 180px 1fr 180px; align-items: center; gap: 20px; padding-bottom: 10px; border-bottom: 3px double var(--rule); }
+  .masthead { display: grid; grid-template-columns: 180px 1fr 180px; align-items: center; gap: 20px; padding-bottom: 6px; }
+  .personal { text-align: center; font-family: var(--label); text-transform: uppercase; letter-spacing: 0.22em; font-size: 13px; margin: 0; padding: 6px 0; border-top: 3px double var(--rule); }
   .ear { border: 1px solid var(--rule); padding: 8px 10px; font-family: var(--label); font-size: 13px; line-height: 1.35; text-align: center; }
   .ear-title { display: block; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 11px; margin-bottom: 2px; }
   .title-block { text-align: center; }
@@ -281,20 +283,32 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .bulletin p { margin: 0; font-size: 15.5px; line-height: 1.45; }
   .bulletin .b-date { font-family: var(--label); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
 
-  /* Profile */
-  .profile { padding: 22px 0 24px; border-bottom: 3px double var(--rule); text-align: center; }
-  .pullquote { font-family: var(--display); font-style: italic; font-weight: 700; font-size: 34px; line-height: 1.2; margin: 8px auto 12px; max-width: 820px; }
-  .profile-line { margin: 0 auto 10px; max-width: 820px; }
-  .profile-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px 22px; font-family: var(--label); text-transform: uppercase; letter-spacing: 0.1em; font-size: 13px; margin: 0; }
+  .reach { break-inside: avoid; border: 1px solid var(--rule); padding: 8px 10px; margin-top: 4px; text-align: left; }
+  .reach-title { font-family: var(--label); font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; margin: 0 0 4px !important; }
+  .reach-links { display: flex; flex-wrap: wrap; gap: 4px 14px; font-family: var(--label); font-size: 14px; margin: 0 !important; }
+
+  /* Trajectory: a timeline strip of big years */
+  .archives { padding: 24px 0 22px; border-bottom: 3px double var(--rule); }
+  .road { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); }
+  .road li { display: flex; flex-direction: column; padding: 0 20px; border-left: 1px solid var(--rule); position: relative; }
+  .road li:first-child { padding-left: 0; border-left: none; }
+  .road li:not(:last-child)::after { content: '→'; position: absolute; right: -9px; top: 8px; font-family: var(--display); font-size: 18px; background: var(--paper); line-height: 1; padding: 2px 0; }
+  .road-years { font-family: var(--display); font-weight: 900; font-size: 30px; line-height: 1.1; }
+  .road-name { font-family: var(--display); font-weight: 700; font-size: 19px; margin-top: 4px; }
+  .road-role { font-family: var(--label); font-size: 14px; color: var(--ink-soft); }
+  .road-honor { font-style: italic; font-size: 14px; margin-top: 2px; }
+  .road li.now .road-years::after { content: ' ★'; font-size: 20px; vertical-align: 4px; }
 
   /* Features */
   .features { padding-top: 24px; }
   .feature .kicker { margin-bottom: 8px; }
   .section-deck { font-family: var(--display); font-style: italic; font-size: 18px; margin: -4px 0 16px; color: var(--ink-soft); }
-  .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
-  @media (max-width: 1100px) and (min-width: 821px) { .feature-grid { grid-template-columns: repeat(2, 1fr); } .feature:nth-child(odd) { padding-left: 0; border-left: none; } }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px 0; }
+  .feature.top { grid-column: span 2; display: grid; grid-template-columns: 1.15fr 1fr; gap: 24px; padding-bottom: 22px; border-bottom: 1px solid var(--rule); }
+  .feature.top + .feature { border-bottom: 1px solid var(--rule); }
+  .feature.top h4 { font-size: 32px; }
   .feature { padding: 0 22px 22px; border-left: 1px solid var(--rule); }
-  .feature:first-child { padding-left: 0; border-left: none; }
+  .feature:first-child, .feature:nth-child(3) { padding-left: 0; border-left: none; }
   .feature h4 { font-family: var(--display); font-weight: 900; font-size: 23px; line-height: 1.12; margin: 0 0 6px; }
   .feature-deck { font-family: var(--display); font-style: italic; font-size: 16.5px; line-height: 1.35; margin: 0 0 8px; color: var(--ink-soft); }
   .feature-meta { font-family: var(--label); font-size: 13px; margin: 0 0 2px; }
@@ -308,13 +322,10 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .all-pubs { font-family: var(--label); font-style: italic; text-align: center; font-size: 14px; margin: 8px 0 24px; padding-top: 10px; border-top: 3px double var(--rule); }
 
   /* Back page */
-  .back-page { display: grid; grid-template-columns: 1fr 1.3fr 1fr; gap: 0; }
+  .back-page { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 0; }
   .back-page > div { padding: 0 22px; border-left: 1px solid var(--rule); }
   .back-page > div:first-child { padding-left: 0; border-left: none; }
   .back-page p { font-size: 15.5px; text-align: justify; hyphens: auto; }
-  .archive { margin: 0 0 10px; }
-  .a-years { display: block; font-family: var(--label); font-size: 12px; letter-spacing: 0.1em; color: var(--ink-soft); }
-  .classifieds-head { margin-top: 18px; }
   .ad { border: 1px solid var(--rule); padding: 8px 10px; margin-bottom: 8px; font-family: var(--label); font-size: 14px; line-height: 1.4; }
 
   .colophon { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-top: 28px; padding-top: 10px; border-top: 3px double var(--rule); font-family: var(--label); font-size: 13px; letter-spacing: 0.06em; }
@@ -328,9 +339,12 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
     .bulletins { border-left: none; padding-left: 0; }
     .lead-head { font-size: 34px; }
     .columns-2 { column-count: 1; }
-    .pullquote { font-size: 26px; }
+    .road { grid-template-columns: 1fr 1fr; gap: 18px 0; }
+    .road li:nth-child(odd) { padding-left: 0; border-left: none; }
+    .road li::after { display: none; }
     .feature-grid { grid-template-columns: 1fr; }
     .feature { padding: 0 0 20px; border-left: none; }
+    .feature.top { grid-column: auto; grid-template-columns: 1fr; gap: 10px; }
     .back-page { grid-template-columns: 1fr; }
     .back-page > div { padding: 0; border-left: none; }
     .dateline { justify-content: center; }
