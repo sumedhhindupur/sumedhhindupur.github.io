@@ -49,7 +49,7 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'n
     </main>
     <footer class="container">
       <span class="mono">© {new Date().getFullYear()} {site.name} · Last updated {updated}</span>
-      <span class="mono"><a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>{site.email.user} [at] {site.email.domain.replace('.', ' [dot] ')}</a></span>
+      <span class="mono"><a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>{site.email.user.split('.').map((w) => w[0].toUpperCase() + w.slice(1)).join('.')} [at] {site.email.domain.replace('.', ' [dot] ')}</a></span>
     </footer>
     <script>
       // Builds the mailto: link only on click, so the address never appears in the page source.
