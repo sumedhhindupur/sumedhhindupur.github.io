@@ -2,8 +2,9 @@
 import '../styles/global.css';
 import { site } from '../data/site';
 
-interface Props { title?: string; description?: string; math?: boolean }
-const { title, description = 'Sumedh Hindupur: representation geometry, interpretability and computational neuroscience.', math = false } = Astro.props;
+// `plain` switches to the bare-bones look (see the end of global.css); `home` is where the name and Research links point.
+interface Props { title?: string; description?: string; math?: boolean; plain?: boolean; home?: string }
+const { title, description = 'Sumedh Hindupur: representation geometry, interpretability and computational neuroscience.', math = false, plain = false, home = '/' } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : site.name;
 const path = Astro.url.pathname;
 // Set when the site is built, i.e. on every push.
@@ -26,11 +27,11 @@ const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'n
     <!-- Private visitor stats (no cookies): https://sumedhhindupur.goatcounter.com -->
     <script is:inline data-goatcounter="https://sumedhhindupur.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   </head>
-  <body>
+  <body class:list={{ plain }}>
     <header class="container nav">
-      <a href="/" class="brand">{site.name}</a>
+      <a href={home} class="brand">{site.name}</a>
       <nav>
-        <a href="/#research">Research</a>
+        <a href={`${home}#research`}>Research</a>
         <a href="/writing/" class={path.startsWith('/writing') ? 'active' : ''}>Writing</a>
         <a href="/cv.pdf">CV</a>
       </nav>

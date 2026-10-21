@@ -62,3 +62,34 @@ h2.section {
 }
 
 section { padding: 44px 0; border-top: 1px solid var(--rule); }
+
+/* ---------- Plain edition: same layout, no decoration, old-school type ---------- */
+body.plain {
+  --font-sans: 'Times New Roman', Times, serif;
+  --font-mono: 'Courier New', Courier, monospace;
+  --text: #000;
+  --muted: #444;
+  --faint: #666;
+  --rule: #bbb;
+  --navy: #000;
+  --amber: #000;
+  --rust: #000;
+  --green: #000;
+  --accent: #0000ee;
+  background: #fff;
+}
+body.plain a { text-decoration: underline; }
+body.plain a:visited { color: #551a8b; }
+body.plain a:hover { text-decoration-color: currentColor; }
+body.plain .edition-note { font-style: italic; color: #444; margin: 8px 0 0; }
+body.plain .tag { background: none !important; color: #444 !important; padding: 0; }
+body.plain h3::before { display: none; }
+body.plain .blurb { padding-left: 0; }
+body.plain .current .stop { animation: none !important; box-shadow: none !important; background: #000 !important; border-color: #000 !important; }
+body.plain .affiliations li::after,
+body.plain .affiliations li:nth-last-child(2)::after { background: #bbb !important; }
+body.plain .photo { border-radius: 0; box-shadow: none; }
+body.plain .media img, body.plain .media video, body.plain .media-placeholder { border-radius: 0; }
+body.plain .project:hover .media img, body.plain .project:hover .media video { border-color: #bbb; box-shadow: none; }
+body.plain .hobby .icon, body.plain .links a, body.plain .keywords { color: inherit; }
+body.plain .honor { color: #000; font-style: italic; }

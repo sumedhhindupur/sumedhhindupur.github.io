@@ -1,97 +1,291 @@
 ---
-// The plain edition: a bare-bones, 1990s-style homepage with the same content as the Gazette.
-// Deliberately almost no styling: Times, default link colours, horizontal rules and lists.
+// The plain edition: the same homepage as before the Gazette, with the colours and decoration removed
+// (the overrides live under `body.plain` in global.css).
+import Base from '../layouts/Base.astro';
 import { site, affiliations, interests, leadership } from '../data/site';
-import { news } from '../data/news';
+import { news, visibleCount } from '../data/news';
 import { groups, me } from '../data/research';
+import Icon from '../components/Icon.astro';
 
+const recent = news.slice(0, visibleCount);
+const older = news.slice(visibleCount);
 const boldMe = (authors: string) => authors.replace(me, `<b>${me}</b>`);
-const updated = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'America/New_York' });
+const isVideo = (src: string) => /\.(mp4|webm)$/i.test(src);
+const initials = site.name.split(' ').map((w) => w[0]).join('');
+const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 ---
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{site.name}</title>
-    <meta name="description" content={`Homepage of ${site.name}.`} />
-    <!-- Private visitor stats (no cookies): https://sumedhhindupur.goatcounter.com -->
-    <script is:inline data-goatcounter="https://sumedhhindupur.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
-    <style is:inline>
-      body { font-family: "Times New Roman", Times, serif; font-size: 18px; line-height: 1.45; max-width: 760px; margin: 0 auto; padding: 16px; background: #fff; color: #000; }
-      img { max-width: 100%; }
-    </style>
-  </head>
-  <body>
-    <p><i>This is the plain edition. The illustrated edition is <a href="/">The Hindupur Gazette</a>.</i></p>
-    <hr />
+<Base title="Plain edition" plain home="/plain/">
+  <div class="container">
+    <p class="edition-note">This is the plain edition. The illustrated edition is <a href="/">The Hindupur Gazette</a>.</p>
+    <!-- Hero -->
+    <div class="hero">
+      {site.photo
+        ? <img class="photo" src={site.photo} alt={site.name} />
+        : <div class="photo placeholder" aria-hidden="true">{initials}</div>}
+      <div>
+        <h1>{site.name}</h1>
+        <p class="position" set:html={site.position} />
+        <p class="tagline">{site.tagline}</p>
+        <p class="keywords mono">{site.keywords.map((kw, k) => <>{k > 0 && ' · '}<span class="kw">{kw}</span></>)}</p>
+        <p class="intro">
+          Outside research, I love {interests.map((i, k) => (
+            <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}<span class="hobby">{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}{i.icons.map((n) => <Icon name={n} />)}</span></>
+          ))}.
+        </p>
+        <p class="links">
+          <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}><Icon name="mail" />Email</a>
+          {site.links.map((l) => <a href={l.url}><Icon name={l.icon} />{l.label}</a>)}
+        </p>
+      </div>
+    </div>
 
-    <h1>{site.name}</h1>
-    <img src={site.photo ?? '/photo.jpg'} alt={`${site.name} giving a talk`} width="320" />
-    <p><span set:html={site.position} /> {site.tagline}</p>
-    <p>Research interests: {site.keywords.join(', ')}.</p>
-    <p>
-      Originally from Hyderabad, India. Outside research, I enjoy {interests.map((i, k) => (
-        <>{k === 0 ? '' : k === interests.length - 1 ? ' and ' : ', '}{'url' in i ? <a href={i.url}>{i.text}</a> : i.text}</>
-      ))}.
-    </p>
-    <p>
-      Email: <a href="#" class="js-email" data-u={site.email.user} data-d={site.email.domain}>{site.email.user} [at] {site.email.domain.replace('.', ' [dot] ')}</a><br />
-      {site.links.map((l, k) => <>{k > 0 && ' | '}<a href={l.url}>{l.label}</a></>)}
-    </p>
+    <!-- Affiliations -->
+    <ol class="affiliations">
+      {affiliations.map((a, k) => (
+        <li class:list={{ current: k === affiliations.length - 1 }}>
+          <span class="stop" aria-hidden="true"></span>
+          <span class="mono faint">{a.years}</span>
+          <span class="aff-name">{a.name}</span>
+          <span class="mono">{a.role}</span>
+          {a.honor && <span class="mono honor">{a.honor}</span>}
+        </li>
+      ))}
+    </ol>
 
-    <hr />
-    <h2>News</h2>
-    <ul>
-      {news.map((n) => <li>{n.date}: <span set:html={n.text} /></li>)}
-    </ul>
+    <!-- News -->
+    <section id="news">
+      <h2 class="section">News</h2>
+      <ul class="news">
+        {recent.map((n) => (
+          <li><span class="mono">{n.date}</span><span class="tagcell"><span class={`tag mono tag-${n.tag.toLowerCase()}`}>{n.tag}</span></span><span set:html={n.text} /></li>
+        ))}
+      </ul>
+      {older.length > 0 && (
+        <details>
+          <summary class="mono">Older news</summary>
+          <ul class="news">
+            {older.map((n) => (
+              <li><span class="mono">{n.date}</span><span class="tagcell"><span class={`tag mono tag-${n.tag.toLowerCase()}`}>{n.tag}</span></span><span set:html={n.text} /></li>
+            ))}
+          </ul>
+        </details>
+      )}
+    </section>
 
-    <hr />
-    <h2>Research</h2>
-    <p>(† denotes equal contribution. Full list on <a href={site.links.find((l) => l.icon === 'scholar')?.url}>Google Scholar</a>.)</p>
-    {groups.map((g) => (
-      <>
-        <h3>{g.theme}</h3>
-        <ul>
+    <!-- Research -->
+    <section id="research">
+      <h2 class="section">Research</h2>
+      <p class="mono note">† equal contribution</p>
+      {groups.map((g) => (
+        <div class="group">
+          <h3>{g.theme}</h3>
+          {g.blurb && <p class="blurb">{g.blurb}</p>}
           {g.projects.map((p) => (
-            <li>
-              {p.links[0] ? <a href={p.links[0].url}>{p.title}</a> : p.title}.<br />
-              <span set:html={boldMe(p.authors.replace(/\.$/, ''))} />. <i>{p.venue}</i>.<br />
-              {p.summary}
-            </li>
+            <article class="project">
+              <div class="media">
+                {p.media === null
+                  ? <div class="media-placeholder mono">figure</div>
+                  : isVideo(p.media)
+                    ? <video src={p.media} autoplay muted loop playsinline preload="metadata" />
+                    : <img src={p.media} alt="" loading="lazy" />}
+                {p.credit && <a class="credit mono" href={p.credit.url}>{p.credit.text}</a>}
+              </div>
+              <div>
+                <h4>{p.title}</h4>
+                <p class="authors" set:html={boldMe(p.authors)} />
+                <p class="mono venue">{p.venue}</p>
+                <p class="summary">{p.summary}</p>
+                {p.links.length > 0 && (
+                  <p class="plinks mono">{p.links.map((l) => <a href={l.url}>{l.label}</a>)}</p>
+                )}
+              </div>
+            </article>
           ))}
-        </ul>
-      </>
-    ))}
-
-    <hr />
-    <h2>Education and Experience</h2>
-    <ul>
-      {[...affiliations].reverse().map((a) => (
-        <li>{a.years}: {a.name}, {a.role}.{a.honor && ` ${a.honor}.`}</li>
+        </div>
       ))}
-    </ul>
+      <p class="mono all-pubs"><a href={scholar}>Full publication list on Google Scholar →</a></p>
+    </section>
 
-    <hr />
-    <h2>Leadership and Organization</h2>
-    <ul>
+    <!-- Leadership and Organization -->
+    <section id="leadership">
+      <h2 class="section">Leadership and Organization</h2>
       {leadership.map((l) => (
-        <li><a href={l.url}>{l.name}</a>, {l.role}{l.years && `, ${l.years}`}. {l.text}</li>
+        <div class="lead">
+          <div class="lead-head">
+            <a href={l.url} class="lead-name">{l.name}</a>
+            <span class="mono">{l.role}{l.years && ` · ${l.years}`}</span>
+          </div>
+          {l.text && <p>{l.text}</p>}
+        </div>
       ))}
-    </ul>
+    </section>
+  </div>
+</Base>
 
-    <hr />
-    <p><a href={site.links.find((l) => l.icon === 'cv')?.url}>CV (PDF)</a></p>
-    <p><small>Last modified: {updated}</small></p>
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 48px;
+    align-items: center;
+    padding: 48px 0 36px;
+  }
+  .photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 10px 30px -18px rgba(31, 58, 110, 0.45);
+  }
+  .photo.placeholder {
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    color: var(--faint);
+    font-size: 40px;
+    font-weight: 300;
+  }
+  h1 {
+    font-size: 42px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    margin: 0 0 10px;
+  }
+  .intro { margin: 0 0 14px; color: #333; max-width: 760px; }
+  .position { margin: -4px 0 14px; color: var(--muted); }
+  .tagline { font-size: 24px; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 4px; }
+  .keywords { font-size: 14px; color: var(--navy); margin: 0 0 16px; }
+  .kw { white-space: nowrap; }
+  .hobby { white-space: nowrap; }
+  .hobby :global(.icon) { vertical-align: -0.12em; margin-left: 5px; color: var(--amber); }
+  .hobby :global(.icon + .icon) { margin-left: 2px; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 22px; margin: 0; font-size: 17px; }
+  .links a { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); }
+  .links a:hover { color: var(--text); text-decoration: none; }
 
-    <script>
-      // Builds the mailto: link only on click, so the address never appears in the page source.
-      document.querySelectorAll<HTMLAnchorElement>('a.js-email').forEach((a) => {
-        a.addEventListener('click', (e) => {
-          e.preventDefault();
-          window.location.href = 'mailto:' + a.dataset.u + '@' + a.dataset.d;
-        });
-      });
-    </script>
-  </body>
-</html>
+  /* Affiliations as stations on a metro line; the last (current) stop is highlighted. */
+  .affiliations {
+    --gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 48px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--gap);
+  }
+  .affiliations li { position: relative; display: flex; flex-direction: column; gap: 2px; padding-top: 28px; }
+  .affiliations li::after {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: 16px;
+    right: calc(-1 * var(--gap));
+    height: 2px;
+    background: #e2e2e2;
+  }
+  .affiliations li:last-child::after { display: none; }
+  .affiliations li:nth-last-child(2)::after { background: linear-gradient(to right, #e2e2e2 30%, var(--accent)); }
+  .stop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #c9c9c9;
+    z-index: 1;
+  }
+  .current .stop { background: var(--accent); border-color: var(--accent); animation: pulse 2.4s ease-out infinite; }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(194, 124, 14, 0.45); }
+    70%, 100% { box-shadow: 0 0 0 9px rgba(194, 124, 14, 0); }
+  }
+  @media (prefers-reduced-motion: reduce) { .current .stop { animation: none; box-shadow: 0 0 0 4px rgba(194, 124, 14, 0.2); } }
+  .aff-name { font-weight: 600; font-size: 18px; margin-top: 2px; }
+  .faint { color: var(--faint); }
+  .honor { color: #8a5a08; }
+  .all-pubs { margin: 28px 0 0; }
+
+  .news { list-style: none; padding: 0; margin: 0; }
+  .news li {
+    display: grid;
+    grid-template-columns: 72px 70px 1fr;
+    gap: 14px;
+    align-items: baseline;
+    padding: 8px 0;
+    font-size: 18px;
+  }
+  .tag { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.04em; padding: 1px 7px; border-radius: 4px; color: var(--muted); background: #f2f2f0; }
+  .tag-paper { color: var(--navy); background: rgba(31, 58, 110, 0.08); }
+  .tag-talk { color: #3f6b41; background: rgba(77, 124, 79, 0.11); }
+  .tag-press { color: #8a5a08; background: rgba(194, 124, 14, 0.13); }
+  .tag-poster { color: #a33e24; background: rgba(183, 71, 42, 0.1); }
+  details { margin-top: 10px; }
+  summary { cursor: pointer; padding: 6px 0; }
+  summary:hover { color: var(--text); }
+
+  .note { margin: -12px 0 20px; color: var(--faint); }
+  .group { margin-bottom: 40px; --theme: var(--navy); }
+  .group:nth-of-type(2) { --theme: var(--amber); }
+  .group:nth-of-type(3) { --theme: var(--rust); }
+  .group:last-child { margin-bottom: 0; }
+  h3 { font-size: 23px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
+  h3::before {
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 0.95em;
+    margin-right: 12px;
+    border-radius: 3px;
+    background: var(--theme);
+    vertical-align: -0.1em;
+  }
+  .blurb { padding-left: 17px; max-width: 860px; }
+  .blurb { color: var(--muted); margin: 0 0 8px; }
+  .project {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
+    padding: 22px 0;
+  }
+  .media img, .media video, .media-placeholder { aspect-ratio: 4 / 3; border-radius: 6px; background: #fff; border: 1px solid var(--rule); }
+  .media img, .media video { width: 100%; height: auto; object-fit: contain; display: block; transition: border-color 0.2s, box-shadow 0.2s; }
+  .project:hover .media img, .project:hover .media video { border-color: var(--theme); box-shadow: 0 4px 16px -8px var(--theme); }
+  .media-placeholder {
+    width: 100%;
+    display: grid;
+    place-items: center;
+    color: var(--faint);
+    background-image: radial-gradient(#dcdcdc 1px, transparent 1px);
+    background-size: 12px 12px;
+  }
+  .credit { display: block; margin-top: 4px; font-size: 11.5px; color: var(--faint); }
+  h4 { font-size: 19.5px; font-weight: 600; line-height: 1.35; margin: 0 0 4px; }
+  .authors { font-size: 16.5px; color: var(--muted); margin: 0; }
+  .authors :global(b) { color: var(--text); font-weight: 600; }
+  .venue { margin: 2px 0 6px; }
+  .summary { font-size: 17.5px; margin: 0 0 6px; color: #333; max-width: 780px; }
+  .plinks { display: flex; gap: 14px; margin: 0; }
+
+  .lead { padding: 8px 0 12px; }
+  .lead-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; }
+  .lead-name { color: var(--text); font-weight: 600; }
+  .lead p { margin: 4px 0 0; font-size: 17.5px; color: #333; max-width: 860px; }
+
+  @media (max-width: 640px) {
+    .hero { grid-template-columns: 1fr; gap: 20px; padding-top: 24px; }
+    .photo { max-width: 460px; }
+    h1 { font-size: 32px; }
+    .affiliations { grid-template-columns: 1fr; --gap: 20px; }
+    .affiliations li { padding: 0 0 0 32px; }
+    .affiliations li::after { top: 18px; left: 7px; right: auto; bottom: calc(-1 * var(--gap)); width: 2px; height: auto; }
+    .affiliations li:nth-last-child(2)::after { background: linear-gradient(to bottom, #e2e2e2 30%, var(--accent)); }
+    .stop { top: 3px; }
+    .news li { grid-template-columns: 58px 1fr; }
+    .news li .tagcell { display: none; }
+    .project { grid-template-columns: 1fr; gap: 12px; }
+  }
+</style>
