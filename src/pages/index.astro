@@ -36,7 +36,8 @@ const headlineFor = (title: string) =>
 const first = site.name.split(' ')[0];
 const boldMe = (authors: string) => authors.replace(me, `<b>${me}</b>`);
 const papers = groups.flatMap((g) => g.projects.map((p) => ({ ...p, theme: g.theme })));
-const bulletins = news.slice(0, 8);
+const bulletins = news.slice(0, 5);
+const earlier = news.slice(5);
 const fields = site.keywords.map((k) => k.toLowerCase());
 const fieldList = fields.slice(0, -1).join(', ') + ' and ' + fields[fields.length - 1];
 
@@ -130,6 +131,17 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
               <p set:html={n.text} />
             </div>
           ))}
+          {earlier.length > 0 && (
+            <details class="earlier">
+              <summary>Earlier bulletins</summary>
+              {earlier.map((n) => (
+                <div class="bulletin">
+                  <p class="b-date">{n.date} · {n.tag}</p>
+                  <p set:html={n.text} />
+                </div>
+              ))}
+            </details>
+          )}
         </aside>
       </section>
 
@@ -308,6 +320,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .halftone:hover::after { opacity: 0; }
   figcaption { font-family: var(--label); font-size: 13px; font-style: italic; margin-top: 6px; color: var(--ink-soft); }
 
+  .earlier summary { cursor: pointer; font-family: var(--label); font-style: italic; font-size: 14px; padding: 8px 0; }
   .bulletin { padding: 8px 0 10px; border-bottom: 1px dotted rgba(27, 26, 23, 0.5); }
   .bulletin p { margin: 0; font-size: 15.5px; line-height: 1.45; }
   .bulletin .b-date { font-family: var(--label); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
