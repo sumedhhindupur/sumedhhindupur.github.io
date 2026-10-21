@@ -19,18 +19,18 @@ npm run build      # production build into dist/
 | Tagline, keywords and position | `src/data/site.ts` (`tagline`, `keywords`, `position`) |
 | Interests sentence (icons inline) | `src/data/site.ts` (`interests`) |
 | Leadership and Organization section | `src/data/site.ts` (`leadership`) |
-
-The footer's "Last updated" date is set automatically each time the site is built (every push).
 | News | `src/data/news.ts`, newest first; `visibleCount` sets how many show before "Older news" |
 | Research projects and themes | `src/data/research.ts` |
 | CV | replace `public/cv.pdf` |
 | Blog posts | `src/content/writing/*.md` |
 
+The footer's "Last updated" date is set automatically each time the site is built (every push).
+
 **Email:** stored as two parts (`email.user`, `email.domain`) in `site.ts`, so the full address never appears in the page source or this repo. The footer shows it as `name [at] gmail [dot] com`, and email links build the `mailto:` only when clicked.
 
 **Links and icons:** each entry in `links` has an `icon`: `scholar`, `github`, `linkedin`, `x`, `bluesky` or `cv`; interests take a list of `icons` from `running`, `tennis`, `books`, `guitar`, `music`.
 
-**Photo:** save as `public/photo.jpg`, then set `photo: '/photo.jpg'` in `site.ts`.
+**Photo:** save it in `public/` (currently `photo-talk.jpg`, cropped to 4:3), then set `photo` in `site.ts`.
 
 **Project visuals:** put files in `public/media/` and set `media: '/media/name.mp4'` (or `.png`/`.jpg`) in `research.ts`. Videos autoplay muted on a loop. Use a 4:3 aspect ratio and keep videos under ~3 MB (e.g. `ffmpeg -i in.mov -vf scale=800:-2 -an -crf 28 out.mp4`).
 

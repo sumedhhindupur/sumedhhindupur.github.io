@@ -2,8 +2,8 @@
 
 export const site = {
   name: 'Sumedh Hindupur',
-  // Put your photo at public/photo.jpg and set this to '/photo.jpg'.
-  photo: '/photo.jpg' as string | null,
+  // Photo in public/, shown as a 4:3 rounded rectangle. (public/photo.jpg is the old headshot.)
+  photo: '/photo-talk.jpg' as string | null,
   // One line under your name, then your position. The position may contain HTML links.
   tagline: 'I read the minds of AI models and animals.',
   // Shown under the tagline, separated by dots.
