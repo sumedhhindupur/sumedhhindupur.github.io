@@ -123,3 +123,9 @@ body.plain #news > .news > li:first-child > span:last-child::after { content: ' 
 @media (prefers-reduced-motion: reduce) { body.plain #news > .news > li:first-child > span:last-child::after { animation: none; } }
 
 body.plain footer::after { content: 'Best viewed with Netscape Navigator 4.0 at 800×600.'; display: block; width: 100%; font-family: var(--font-mono); font-size: 12px; color: #333; margin-top: 6px; }
+
+/* 90s visitor counter (plain edition) */
+.counter { text-align: center; font-family: 'Times New Roman', Times, serif; font-size: 16px; margin: 28px 0 8px; }
+.counter[hidden] { display: none; }
+.odometer { display: inline-flex; gap: 2px; margin-left: 6px; padding: 3px; background: #000; border: 2px inset #888; vertical-align: middle; }
+.odometer span { display: inline-block; width: 1.1em; padding: 1px 0; text-align: center; font-family: 'Courier New', Courier, monospace; font-weight: bold; font-size: 18px; color: #39ff14; background: #111; border-right: 1px solid #333; }

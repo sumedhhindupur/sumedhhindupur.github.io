@@ -119,8 +119,28 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         </div>
       ))}
     </section>
+
+    <!-- 90s visitor counter, filled from GoatCounter's public count (hidden if unavailable) -->
+    <p class="counter" hidden>You are visitor number <span class="odometer"></span></p>
   </div>
 </Base>
+
+<script>
+  // GoatCounter only shares counts when "Allow adding visitor counts on your website" is on in its settings.
+  const counter = document.querySelector<HTMLElement>('.counter');
+  const show = (n: number) => {
+    const digits = String(n).padStart(6, '0');
+    counter!.querySelector('.odometer')!.innerHTML = [...digits].map((d) => `<span>${d}</span>`).join('');
+    counter!.hidden = false;
+  };
+  fetch('https://sumedhhindupur.goatcounter.com/counter/TOTAL.json')
+    .then((r) => (r.ok ? r.json() : Promise.reject()))
+    .then((d) => show(Number(String(d.count).replace(/\D/g, ''))))
+    .catch(() => {
+      // On the local preview, show a sample so the look can be checked.
+      if (location.hostname === 'localhost') show(42);
+    });
+</script>
 
 <style>
   .hero {
