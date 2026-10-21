@@ -83,7 +83,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
         </div>
         <div class="title-block">
           <h1 class="title">The Hindupur Gazette</h1>
-          <p class="motto">“All the Representations Fit to Print”</p>
+          <p class="motto">“Reading Between the Layers”</p>
         </div>
         <div class="ear right">
           <span class="ear-title">Now Accepting Offers</span>
@@ -106,7 +106,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
       <section class="front">
         <article class="lead" id="profile">
           <p class="kicker">Profile</p>
-          <h2 class="lead-head">{site.name} Reads the Minds of AI Models and Animals</h2>
+          <h2 class="lead-head">{site.name} <span class="nowrap">Reverse-Engineers</span> Minds, Artificial and Biological</h2>
           <p class="deck">The Harvard researcher studies {fieldList}.</p>
           <figure class="halftone">
             <img src={site.photo ?? '/photo.jpg'} alt={`${site.name} giving a talk`} />
@@ -301,6 +301,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
   .front { display: grid; grid-template-columns: 2.1fr 1fr; gap: 32px; padding-bottom: 24px; border-bottom: 3px double var(--rule); }
   .bulletins { border-left: 1px solid var(--rule); padding-left: 24px; }
   .kicker { font-family: var(--label); text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; margin: 0 0 6px; color: var(--ink-soft); }
+  .nowrap { white-space: nowrap; }
   .lead-head { font-family: var(--display); font-weight: 900; font-size: 52px; line-height: 1.05; letter-spacing: -0.01em; margin: 0 0 10px; }
   .deck { font-family: var(--display); font-style: italic; font-weight: 700; font-size: 21px; line-height: 1.3; margin: 0 0 16px; color: var(--ink-soft); }
   .byline-row { display: flex; align-items: center; gap: 14px; margin: 12px 0 10px; padding-bottom: 10px; border-bottom: 1px solid var(--rule); }

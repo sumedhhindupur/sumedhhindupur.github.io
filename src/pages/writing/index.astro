@@ -1,4 +1,79 @@
 ---
-import PostList from '../../components/PostList.astro';
+// The Writing page, styled as a page of The Hindupur Gazette. For now it only announces that essays are coming.
+import { site } from '../../data/site';
 ---
-<PostList category="research" />
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Writing · The Hindupur Gazette</title>
+    <meta name="description" content={`Essays and notes by ${site.name}. Coming soon.`} />
+    <meta property="og:title" content="Writing · The Hindupur Gazette" />
+    <meta property="og:image" content={new URL('/og.png', Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Private visitor stats (no cookies): https://sumedhhindupur.goatcounter.com -->
+    <script is:inline data-goatcounter="https://sumedhhindupur.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Old+Standard+TT:wght@400;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="paper">
+      <header class="masthead">
+        <a href="/" class="title">The Hindupur Gazette</a>
+        <p class="motto">“Reading Between the Layers”</p>
+      </header>
+      <p class="banner">The Writing Desk · Essays &amp; Notes</p>
+
+      <article class="notice">
+        <p class="kicker">Opinion &amp; Essays</p>
+        <h1>Coming Soon</h1>
+        <p class="deck">Essays on representation geometry, interpretability and the brain, along with the occasional personal column, are on their way.</p>
+        <div class="box">
+          <p class="box-title">Notice to Readers</p>
+          <p>Our correspondent is hard at work. The first columns are being typeset; please check back soon.</p>
+        </div>
+      </article>
+
+      <footer class="colophon">
+        <a href="/">← Return to the front page</a>
+        <a href="/plain/">Plain edition</a>
+      </footer>
+    </div>
+  </body>
+</html>
+
+<style>
+  :global(*) { box-sizing: border-box; }
+  :global(body) {
+    margin: 0;
+    color: #1b1a17;
+    font-family: 'Libre Caslon Text', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.55;
+    background-color: #f2ecdd;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.08  0 0 0 0 0.05  0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  a { color: #1b1a17; text-decoration: underline; text-underline-offset: 2px; }
+  a:hover { color: #7a1f12; }
+  .paper { max-width: 900px; margin: 0 auto; padding: 24px 32px 40px; }
+  .masthead { text-align: center; }
+  .title { font-family: 'UnifrakturMaguntia', serif; font-size: 64px; line-height: 1.05; text-decoration: none; display: inline-block; margin-top: 6px; }
+  .motto { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; font-size: 15px; color: #4a463e; margin: 4px 0 8px; }
+  .banner { text-align: center; font-family: 'Old Standard TT', serif; text-transform: uppercase; letter-spacing: 0.2em; font-size: 13px; margin: 0; padding: 7px 0; border-top: 3px double #1b1a17; border-bottom: 1px solid #1b1a17; }
+  .notice { text-align: center; padding: 56px 0 48px; }
+  .kicker { font-family: 'Old Standard TT', serif; text-transform: uppercase; letter-spacing: 0.16em; font-size: 13px; color: #4a463e; margin: 0 0 8px; }
+  h1 { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 72px; line-height: 1; margin: 0 0 16px; }
+  .deck { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 700; font-size: 22px; line-height: 1.35; color: #4a463e; max-width: 640px; margin: 0 auto 32px; }
+  .box { display: inline-block; max-width: 520px; border: 1px solid #1b1a17; padding: 12px 18px; text-align: left; font-family: 'Old Standard TT', serif; font-size: 16px; }
+  .box p { margin: 0; }
+  .box-title { font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; margin-bottom: 4px !important; }
+  .colophon { display: flex; justify-content: space-between; padding-top: 10px; border-top: 3px double #1b1a17; font-family: 'Old Standard TT', serif; font-size: 14px; }
+  @media (max-width: 640px) {
+    .paper { padding: 16px 18px 32px; }
+    .title { font-size: 40px; }
+    h1 { font-size: 48px; }
+    .deck { font-size: 19px; }
+  }
+</style>
