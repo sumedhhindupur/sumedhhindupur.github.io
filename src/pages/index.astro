@@ -88,7 +88,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
       <p class="plain-link">Not a newspaper reader? <a href="/plain/">Read the plain edition →</a></p>
       <nav class="inside" aria-label="Inside this edition">
         <span class="inside-title">Inside this edition:</span>
-        <a href="#profile">Profile</a> · <a href="#bulletins">Bulletins</a> · <a href="#archives">The Road to Harvard</a> · <a href="#research">Latest Research</a> · <a href="#society">Society Pages</a> · <a href="#classifieds">Classifieds</a> · <a href={site.links.find((l) => l.icon === 'cv')?.url}>CV</a> · <a href="/writing/">Writing</a>
+        <a href="#profile">Profile</a> · <a href="#bulletins">Bulletins</a> · <a href="#archives">The Story So Far</a> · <a href="#research">Latest Research</a> · <a href="#society">Society Pages</a> · <a href="#classifieds">Classifieds</a> · <a href={site.links.find((l) => l.icon === 'cv')?.url}>CV</a> · <a href="/writing/">Writing</a>
       </nav>
       <div class="dateline">
         <span>Cambridge, Mass.</span>
@@ -139,7 +139,7 @@ const scholar = site.links.find((l) => l.icon === 'scholar')?.url;
 
       <!-- Trajectory -->
       <section class="archives" id="archives">
-        <h3 class="section-head">From Our Archives: The Road to Harvard</h3>
+        <h3 class="section-head">From Our Archives: The Story So Far</h3>
         <ol class="road">
           {affiliations.map((a, k) => (
             <li class:list={{ now: k === affiliations.length - 1 }}>
